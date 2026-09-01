@@ -5,7 +5,8 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const appDirectory = dirname(fileURLToPath(import.meta.url))
-const dataDirectory = join(appDirectory, 'data')
+const dataDirectory = process.env.DATA_DIR || join(appDirectory, 'data')
+const staticDirectory = join(appDirectory, 'dist')
 mkdirSync(dataDirectory, { recursive: true })
 
 const database = new Database(join(dataDirectory, 'zyrov-members.db'))
@@ -64,7 +65,17 @@ app.post('/api/members', (request, response) => {
   }
 })
 
-const port = Number(process.env.API_PORT) || 3001
-app.listen(port, '127.0.0.1', () => {
-  console.log(`ZYROV membership API ready at http://127.0.0.1:${port}`)
+app.use(express.static(staticDirectory))
+app.use((request, response, next) => {
+  if (request.method === 'GET' && request.accepts('html')) {
+    response.sendFile(join(staticDirectory, 'index.html'))
+    return
+  }
+
+  next()
+})
+
+const port = Number(process.env.PORT || process.env.API_PORT) || 3001
+app.listen(port, '0.0.0.0', () => {
+  console.log(`ZYROV web service ready on port ${port}`)
 })
