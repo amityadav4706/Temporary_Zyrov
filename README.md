@@ -30,3 +30,13 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+## Registration email
+
+Early-access submissions are stored in SQLite and emailed from `zyrovbrand@gmail.com` to `amit@zyrov.in` by the server.
+
+- Enable 2-Step Verification for `zyrovbrand@gmail.com`.
+- Create a Google App Password for the mail service.
+- Set `SMTP_PASS` to that App Password in Render and the local server environment.
+
+Never place SMTP credentials in Vite variables or frontend code. If email delivery fails, the registration is not retained, allowing the visitor to retry.

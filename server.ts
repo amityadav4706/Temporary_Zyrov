@@ -3,6 +3,7 @@ import express from 'express'
 import { mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import nodemailer from 'nodemailer'
 
 const appDirectory = dirname(fileURLToPath(import.meta.url))
 const dataDirectory = process.env.DATA_DIR || join(appDirectory, 'data')
@@ -26,6 +27,21 @@ const insertMember = database.prepare(`
   INSERT INTO members (name, email, phone, consent, created_at)
   VALUES (@name, @email, @phone, 1, @createdAt)
 `)
+const deleteMember = database.prepare('DELETE FROM members WHERE id = ?')
+const senderEmail = 'zyrovbrand@gmail.com'
+const notificationRecipient = 'amit@zyrov.in'
+
+function createMailTransport() {
+  const pass = process.env.SMTP_PASS
+  if (!pass) return null
+
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user: senderEmail, pass },
+  })
+}
+
+const mailTransport = createMailTransport()
 
 const app = express()
 app.use(express.json({ limit: '16kb' }))
@@ -34,7 +50,7 @@ app.get('/api/health', (_request, response) => {
   response.json({ ok: true })
 })
 
-app.post('/api/members', (request, response) => {
+app.post('/api/members', async (request, response) => {
   const name = typeof request.body.name === 'string' ? request.body.name.trim() : ''
   const email = typeof request.body.email === 'string' ? request.body.email.trim().toLowerCase() : ''
   const phoneDigits = typeof request.body.phone === 'string' ? request.body.phone.replace(/\D/g, '') : ''
@@ -45,16 +61,49 @@ app.post('/api/members', (request, response) => {
     return
   }
 
+  if (!mailTransport) {
+    console.error('Member notification email is not configured. Set SMTP_PASS to the Gmail App Password.')
+    response.status(503).json({ message: 'Registration email is temporarily unavailable. Please try again later.' })
+    return
+  }
+
   const createdAt = new Date().toISOString()
+  const phone = `+91${phoneDigits}`
 
   try {
     const result = insertMember.run({
       name,
       email,
-      phone: `+91${phoneDigits}`,
+      phone,
       createdAt,
     })
-    response.status(201).json({ id: Number(result.lastInsertRowid), createdAt })
+
+    const memberId = Number(result.lastInsertRowid)
+    try {
+      await mailTransport.sendMail({
+        from: `ZYROV <${senderEmail}>`,
+        to: notificationRecipient,
+        replyTo: email,
+        subject: `ZYROV early access registration: ${name}`,
+        text: [
+          'A new ZYROV early access registration was submitted.',
+          '',
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Phone: ${phone}`,
+          'Consent accepted: Yes',
+          `Submitted at: ${createdAt}`,
+          `Member ID: ${memberId}`,
+        ].join('\n'),
+      })
+    } catch (error) {
+      deleteMember.run(memberId)
+      console.error('Member notification email failed:', error)
+      response.status(502).json({ message: 'Registration email could not be sent. Please try again.' })
+      return
+    }
+
+    response.status(201).json({ id: memberId, createdAt })
   } catch (error) {
     if (error instanceof Error && error.message.includes('UNIQUE constraint failed')) {
       response.status(409).json({ message: 'This email is already registered for early access.' })

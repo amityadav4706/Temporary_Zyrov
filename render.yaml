@@ -11,6 +11,10 @@ services:
         value: 22.22.0
       - key: DATA_DIR
         value: /var/data
+      - key: SMTP_USER
+        value: zyrovbrand@gmail.com
+      - key: SMTP_PASS
+        sync: false
     disk:
       name: zyrov-data
       mountPath: /var/data
