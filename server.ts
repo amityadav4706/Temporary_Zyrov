@@ -3,7 +3,6 @@ import express from 'express'
 import { mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import nodemailer from 'nodemailer'
 
 const appDirectory = dirname(fileURLToPath(import.meta.url))
 const dataDirectory = process.env.DATA_DIR || join(appDirectory, 'data')
@@ -28,26 +27,7 @@ const insertMember = database.prepare(`
   VALUES (@name, @email, @phone, 1, @createdAt)
 `)
 const deleteMember = database.prepare('DELETE FROM members WHERE id = ?')
-const senderEmail = 'zyrovbrand@gmail.com'
-const notificationRecipient = 'amit@zyrov.in'
-
-function createMailTransport() {
-  const pass = process.env.SMTP_PASS
-  if (!pass) return null
-
-  return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    requireTLS: true,
-    connectionTimeout: 10_000,
-    greetingTimeout: 10_000,
-    socketTimeout: 20_000,
-    auth: { user: senderEmail, pass },
-  })
-}
-
-const mailTransport = createMailTransport()
+const emailWebhookUrl = process.env.EMAIL_WEBHOOK_URL
 
 const app = express()
 app.use(express.json({ limit: '16kb' }))
@@ -67,8 +47,8 @@ app.post('/api/members', async (request, response) => {
     return
   }
 
-  if (!mailTransport) {
-    console.error('Member notification email is not configured. Set SMTP_PASS to the Gmail App Password.')
+  if (!emailWebhookUrl) {
+    console.error('Member notification email is not configured. Set EMAIL_WEBHOOK_URL.')
     response.status(503).json({ message: 'Registration email is temporarily unavailable. Please try again later.' })
     return
   }
@@ -86,22 +66,16 @@ app.post('/api/members', async (request, response) => {
 
     const memberId = Number(result.lastInsertRowid)
     try {
-      await mailTransport.sendMail({
-        from: `ZYROV <${senderEmail}>`,
-        to: notificationRecipient,
-        replyTo: email,
-        subject: `ZYROV early access registration: ${name}`,
-        text: [
-          'A new ZYROV early access registration was submitted.',
-          '',
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Phone: ${phone}`,
-          'Consent accepted: Yes',
-          `Submitted at: ${createdAt}`,
-          `Member ID: ${memberId}`,
-        ].join('\n'),
+      const emailResponse = await fetch(emailWebhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, createdAt, memberId }),
+        signal: AbortSignal.timeout(15_000),
       })
+      const emailResult = await emailResponse.json() as { ok?: boolean; message?: string }
+      if (!emailResponse.ok || emailResult.ok !== true) {
+        throw new Error(emailResult.message || `Email webhook failed with status ${emailResponse.status}.`)
+      }
     } catch (error) {
       deleteMember.run(memberId)
       console.error('Member notification email failed:', error)
