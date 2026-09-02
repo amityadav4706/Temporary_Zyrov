@@ -5,15 +5,24 @@
 
 #root { width: 100%; max-width: none; border: 0; text-align: initial; }
 main { overflow: hidden; background: #010101; }
-.hero { position: relative; height: min(100svh, 920px); min-height: 680px; background: #242522; }
-.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.38), transparent 28%, rgba(0,0,0,.22)); pointer-events: none; }
-.hero-image { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 37%; animation: reveal 900ms ease-out both; }
+.page-intro { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; overflow: hidden; background: #000; color: #fff; font-family: 'Trebuchet MS', sans-serif; transform: translateY(0); transition: transform 1000ms cubic-bezier(.76, 0, .24, 1); will-change: transform; }
+.page-intro p { position: absolute; width: min(100% - 40px, 1000px); margin: 0; text-align: center; line-height: 1.25; letter-spacing: 0; transition: opacity 280ms ease, transform 280ms ease; }
+.page-intro strong { color: #ffd700; font-weight: 800; }
+.page-intro-tagline { font-size: clamp(1.8rem, 4vw, 2.5rem); opacity: 1; transform: translateY(0); }
+.page-intro-announcement { font-size: clamp(2.25rem, 5vw, 3.15rem); opacity: 0; transform: translateY(16px); }
+.page-intro.is-announcement .page-intro-tagline { opacity: 0; transform: translateY(-16px); }
+.page-intro.is-announcement .page-intro-announcement { opacity: 1; transform: translateY(0); }
+.page-intro.is-opening { visibility: hidden; pointer-events: none; transform: translateY(-100%); transition: transform 1000ms cubic-bezier(.76, 0, .24, 1), visibility 0s linear 1000ms; }
+.page-intro.is-opening .page-intro-tagline { opacity: 0; }
+.page-intro.is-opening .page-intro-announcement { opacity: 1; transform: translateY(0); }
+.hero { position: relative; z-index: 1; height: min(100svh, 920px); min-height: 680px; background: #242522; }
+.hero-image { position: fixed; z-index: 0; inset: 0; width: 100%; height: min(100svh, 920px); min-height: 680px; display: block; object-fit: cover; object-position: center 37%; animation: reveal 900ms ease-out both; }
 .footer-mark { font-family: 'Arial Black', 'Trebuchet MS', sans-serif; letter-spacing: .38em; text-decoration: none; }
-.manifesto { background: #010101; }
+.manifesto { position: relative; z-index: 2; background: #010101; }
 .manifesto-copy { width: min(100% - 48px, 960px); margin: 0 auto; padding: 150px 0 130px; text-align: center; }
 .manifesto h1 { max-width: 930px; margin: 0 auto 68px; color: #b5a89a; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3.5rem, 6.6vw, 7.6rem); font-weight: 400; line-height: .98; letter-spacing: 0; }
 .manifesto-copy > p { max-width: 830px; margin: 0 auto 65px; color: #f3f0e9; font-size: clamp(1.35rem, 2.15vw, 2.1rem); line-height: 1.36; letter-spacing: 0; }
-.cta { display: inline-flex; min-width: 250px; min-height: 72px; padding: 0 24px; align-items: center; justify-content: center; flex-direction: column; border: 0; border-radius: 4px; background-color: #39ff14; color: #101010; font: inherit; text-transform: uppercase; cursor: pointer; transition: background-color 180ms ease, color 180ms ease; }
+.cta { display: inline-flex; min-width: 250px; min-height: 72px; padding: 0 24px; align-items: center; justify-content: center; flex-direction: column; border: 0; border-radius: 4px; background-color: #ffd700; color: #101010; font: inherit; text-transform: uppercase; cursor: pointer; transition: background-color 180ms ease, color 180ms ease; }
 button.cta:hover, button.cta:focus-visible { background-color: #f2df38; color: #090909; }
 .cta:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 .cta span { font-size: .68rem; letter-spacing: .18em; }
@@ -22,7 +31,7 @@ button.cta:hover, button.cta:focus-visible { background-color: #f2df38; color: #
 .crystal-canvas { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .logo-aura { position: absolute; z-index: 0; top: 50%; left: 50%; width: 48%; aspect-ratio: 1.08; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(ellipse, rgba(190,128,42,.13), rgba(57,37,12,.05) 44%, transparent 72%); filter: blur(20px); }
 .membership-logo { position: absolute; z-index: 2; top: 50%; left: 50%; display: block; width: min(29.4%, 212.8px); height: auto; transform: translate(-50%, -50%); }
-footer { display: flex; padding: 96px 24px 32px; align-items: center; flex-direction: column; background: #111; color: #a99a89; text-align: center; }
+footer { position: relative; z-index: 2; display: flex; padding: 96px 24px 32px; align-items: center; flex-direction: column; background: #111; color: #a99a89; text-align: center; }
 .footer-mark { padding-left: .38em; color: #fff; font-size: clamp(1.65rem, 3vw, 2.7rem); }
 .footer-links { display: flex; margin-top: 64px; flex-wrap: wrap; justify-content: center; gap: 20px 48px; }
 .footer-links a { color: inherit; font-size: 1rem; text-decoration: none; }
@@ -51,7 +60,7 @@ footer > p { margin: 88px 0 0; font-size: .82rem; opacity: .9; }
 .consent-field input { width: 18px; height: 18px; flex: 0 0 auto; margin: 3px 0 0; accent-color: #171717; }
 .consent-field span { color: inherit !important; }
 .submit-registration { width: fit-content; min-width: 190px; min-height: 58px; border: 0; border-radius: 4px; background: #171717; color: #fff; font: 700 .78rem/1 'Trebuchet MS', sans-serif; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
-.submit-registration:hover, .submit-registration:focus-visible { background: #c9e400; color: #111; }
+.submit-registration:hover, .submit-registration:focus-visible { background: #ffd700; color: #111; }
 .submit-registration:disabled { opacity: .55; cursor: wait; }
 .form-message { margin: -12px 0 0; font-size: .95rem; }
 .form-message.success { color: #275729; }
@@ -59,7 +68,7 @@ footer > p { margin: 88px 0 0; font-size: .82rem; opacity: .9; }
 
 @media (max-width: 700px) {
   .hero { height: 92svh; min-height: 570px; }
-  .hero-image { object-position: 55% center; }
+  .hero-image { height: 92svh; min-height: 570px; object-position: 55% center; }
   .manifesto-copy { width: min(100% - 40px, 520px); padding: 92px 0 88px; }
   .manifesto h1 { margin-bottom: 52px; font-size: clamp(2.65rem, 12.2vw, 4rem); line-height: 1.05; }
   .manifesto-copy > p { margin-bottom: 48px; font-size: 1.18rem; line-height: 1.42; }
@@ -81,6 +90,7 @@ footer > p { margin: 88px 0 0; font-size: .82rem; opacity: .9; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page-intro { display: none; }
   .hero-image { animation: none; }
   .cta { transition: none; }
 }

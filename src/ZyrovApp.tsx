@@ -3,9 +3,29 @@ import CrystalLogo from './CrystalLogo.tsx'
 import './Zyrov.css'
 
 export default function ZyrovApp() {
+  const [introStage, setIntroStage] = useState<'tagline' | 'announcement' | 'opening'>(() =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'opening' : 'tagline',
+  )
   const [registrationOpen, setRegistrationOpen] = useState(false)
   const [submissionState, setSubmissionState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    document.body.style.overflow = 'hidden'
+    const showAnnouncement = window.setTimeout(() => setIntroStage('announcement'), 3000)
+    const openCurtain = window.setTimeout(() => setIntroStage('opening'), 6000)
+    const restoreScroll = window.setTimeout(() => {
+      document.body.style.overflow = ''
+    }, 7000)
+    return () => {
+      window.clearTimeout(showAnnouncement)
+      window.clearTimeout(openCurtain)
+      window.clearTimeout(restoreScroll)
+      document.body.style.overflow = ''
+    }
+  }, [])
 
   useEffect(() => {
     if (!registrationOpen) return
@@ -51,6 +71,11 @@ export default function ZyrovApp() {
 
   return (
     <main>
+      <div className={`page-intro is-${introStage}`} aria-hidden="true">
+        <p className="page-intro-tagline">Made to <strong>Move Beyond.</strong></p>
+        <p className="page-intro-announcement"><strong>Coming Soon.</strong> Stay Tuned.</p>
+      </div>
+
       <section className="hero" aria-label="Zyrov movement collection">
         <img className="hero-image" src="/zyrov-cap.png" alt="Athlete wearing a turquoise Zyrov performance cap" />
       </section>
