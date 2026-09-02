@@ -9,7 +9,7 @@ export default function BrandHistory() {
       </header>
 
       <section className="history-hero">
-        <img src="/zyrov-cap.png" alt="Athlete wearing a turquoise ZYROV performance cap" />
+        <img src="/zyrov-cap-2560.webp" width="2560" height="933" fetchPriority="high" alt="Athlete wearing a turquoise ZYROV performance cap" />
         <div className="history-hero-copy">
           <p>Our History</p>
           <h1>Born from a belief.<br />Built for a lifestyle.</h1>

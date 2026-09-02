@@ -11,7 +11,6 @@ export default function TermsAndConditions() {
       <article className="policy-content terms-content">
         <p className="policy-eyebrow">Legal</p>
         <h1>Terms &amp; Conditions</h1>
-        <p className="policy-updated">Last Updated: September 1, 2026</p>
 
         <div className="policy-intro">
           <p>Welcome to <strong>ZYROV</strong>. These Terms &amp; Conditions (“Terms”) govern your access to and use of the ZYROV website, mobile applications, online services, and any products or services made available through them (collectively, the “Platform”).</p>

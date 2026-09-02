@@ -23,7 +23,6 @@ export default function PrivacyPolicy() {
       <article className="policy-content">
         <p className="policy-eyebrow">Legal</p>
         <h1>Privacy Policy</h1>
-        <p className="policy-updated">Last Updated: September 1, 2026</p>
 
         <div className="policy-intro">
           <p>At <strong>ZYROV</strong>, we respect your privacy and are committed to protecting the personal information entrusted to us.</p>

@@ -38,10 +38,16 @@ export default function CrystalLogo() {
   const stageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current!
-    const stage = stageRef.current!
-    const context = canvas.getContext('2d')!
-    if (!canvas || !stage || !context) return
+    const canvasElement = canvasRef.current
+    const stageElement = stageRef.current
+    if (!canvasElement || !stageElement) return
+
+    const drawingContext = canvasElement.getContext('2d')
+    if (!drawingContext) return
+
+    const canvas: HTMLCanvasElement = canvasElement
+    const stage: HTMLDivElement = stageElement
+    const context: CanvasRenderingContext2D = drawingContext
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 }
@@ -50,6 +56,7 @@ export default function CrystalLogo() {
     let stageWidth = 0
     let stageHeight = 0
     let startTime = performance.now()
+    let isInViewport = false
 
     function resize() {
       const bounds = stage.getBoundingClientRect()
@@ -123,7 +130,9 @@ export default function CrystalLogo() {
         drawCrystal(crystal, x, y, currentAngle + crystal.phase, shimmer)
       })
 
-      if (!reducedMotion && continueAnimation) frameId = requestAnimationFrame(draw)
+      if (!reducedMotion && continueAnimation && isInViewport && !document.hidden) {
+        frameId = requestAnimationFrame(draw)
+      }
     }
 
     function movePointer(event: PointerEvent) {
@@ -139,19 +148,35 @@ export default function CrystalLogo() {
       draw(performance.now(), false)
     }
 
+    function updateAnimation() {
+      cancelAnimationFrame(frameId)
+      if (!reducedMotion && isInViewport && !document.hidden) {
+        startTime = performance.now()
+        frameId = requestAnimationFrame(draw)
+      } else {
+        draw(performance.now(), false)
+      }
+    }
+
     const resizeObserver = new ResizeObserver(resize)
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      isInViewport = entry.isIntersecting
+      updateAnimation()
+    })
     resizeObserver.observe(stage)
+    intersectionObserver.observe(stage)
     stage.addEventListener('pointermove', movePointer)
     stage.addEventListener('pointerleave', resetPointer)
+    document.addEventListener('visibilitychange', updateAnimation)
     resize()
-    startTime = performance.now()
-    draw(startTime)
 
     return () => {
       cancelAnimationFrame(frameId)
       resizeObserver.disconnect()
+      intersectionObserver.disconnect()
       stage.removeEventListener('pointermove', movePointer)
       stage.removeEventListener('pointerleave', resetPointer)
+      document.removeEventListener('visibilitychange', updateAnimation)
     }
   }, [])
 
@@ -159,7 +184,7 @@ export default function CrystalLogo() {
     <div className="crystal-stage" ref={stageRef}>
       <canvas className="crystal-canvas" ref={canvasRef} aria-hidden="true" />
       <div className="logo-aura" aria-hidden="true" />
-      <img className="membership-logo" src="/zyrov-gold-logo.png" alt="ZYROV — Comfort. Style. You." />
+      <img className="membership-logo" src="/zyrov-gold-logo-512.webp" width="512" height="341" loading="lazy" decoding="async" alt="ZYROV — Comfort. Style. You." />
     </div>
   )
 }

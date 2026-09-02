@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import CrystalLogo from './CrystalLogo.tsx'
 import './Zyrov.css'
 
@@ -9,6 +9,7 @@ export default function ZyrovApp() {
   const [registrationOpen, setRegistrationOpen] = useState(false)
   const [submissionState, setSubmissionState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
+  const registrationRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -29,16 +30,35 @@ export default function ZyrovApp() {
 
   useEffect(() => {
     if (!registrationOpen) return
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setRegistrationOpen(false)
     }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', closeOnEscape)
+    registrationRef.current?.querySelector<HTMLElement>('button, input, a[href]')?.focus()
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', closeOnEscape)
+      previouslyFocused?.focus()
     }
   }, [registrationOpen])
+
+  function keepFocusInRegistration(event: ReactKeyboardEvent<HTMLDivElement>) {
+    if (event.key !== 'Tab') return
+    const focusable = registrationRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), a[href]')
+    if (!focusable?.length) return
+
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault()
+      last.focus()
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  }
 
   async function registerMember(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -77,7 +97,10 @@ export default function ZyrovApp() {
       </div>
 
       <section className="hero" aria-label="Zyrov movement collection">
-        <img className="hero-image" src="/zyrov-cap.png" alt="Athlete wearing a turquoise Zyrov performance cap" />
+        <picture>
+          <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp" type="image/webp" />
+          <img className="hero-image" src="/zyrov-cap-2560.webp" width="2560" height="933" fetchPriority="high" alt="Zyrov models wearing performance caps" />
+        </picture>
       </section>
 
       <section className="manifesto">
@@ -89,8 +112,8 @@ export default function ZyrovApp() {
             from the first thought to whatever comes next.
           </p>
           <button className="cta" type="button" onClick={() => setRegistrationOpen(true)}>
-            <span>Get your membership for</span>
-            <strong>Early Access</strong>
+            <span>Get your exclusive</span>
+            <strong>Membership Today</strong>
           </button>
           <CrystalLogo />
         </div>
@@ -109,7 +132,7 @@ export default function ZyrovApp() {
       </footer>
 
       {registrationOpen && (
-        <div className="registration" role="dialog" aria-modal="true" aria-labelledby="registration-title">
+        <div className="registration" ref={registrationRef} role="dialog" aria-modal="true" aria-labelledby="registration-title" onKeyDown={keepFocusInRegistration}>
           <button className="registration-close" type="button" onClick={() => setRegistrationOpen(false)} aria-label="Close registration form">×</button>
           <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
           <div className="registration-content">
