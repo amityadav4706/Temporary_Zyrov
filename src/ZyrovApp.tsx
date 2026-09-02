@@ -106,10 +106,14 @@ export default function ZyrovApp() {
       <section className="manifesto">
         <div className="manifesto-copy">
           <h1>What does it take to create beyond?</h1>
-          <p>
+          <p className="manifesto-intro">
             Zyrov is made for people who turn ideas into action. Everyday
             essentials, shaped around comfort and confidence, keep you moving
             from the first thought to whatever comes next.
+          </p>
+          <p className="membership-note">
+            <span>Not every door opens for everyone.</span>
+            <span>Some are reserved for <strong>ZYROV Club Members.</strong></span>
           </p>
           <button className="cta" type="button" onClick={() => setRegistrationOpen(true)}>
             <span>Get your exclusive</span>
