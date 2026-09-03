@@ -78,8 +78,8 @@ export default function ZyrovApp() {
           consent: form.get('consent') === 'on',
         }),
       })
-      const result = await response.json() as { message?: string }
-      if (!response.ok) throw new Error(result.message || 'Registration failed.')
+      const result = await response.json().catch(() => null) as { message?: string } | null
+      if (!response.ok || !result) throw new Error(result?.message || 'Registration failed.')
       setSubmissionState('success')
       setMessage('You are in. We will contact you when membership access opens.')
       registrationForm.reset()
@@ -99,13 +99,13 @@ export default function ZyrovApp() {
       <section className="hero" aria-label="Zyrov movement collection">
         <picture>
           <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp" type="image/webp" />
-          <img className="hero-image" src="/zyrov-cap-2560.webp" width="2560" height="933" fetchPriority="high" alt="Zyrov models wearing performance caps" />
+          <img className="hero-image" src="/zyrov-cap-2560.webp" width="2560" height="1097" fetchPriority="high" alt="Zyrov models wearing performance caps" />
         </picture>
       </section>
 
       <section className="manifesto">
         <div className="manifesto-copy">
-          <h1>What does it take to create beyond?</h1>
+          <h1>What does it take to move beyond?</h1>
           <p className="manifesto-intro">
             Zyrov is made for people who turn ideas into action. Everyday
             essentials, shaped around comfort and confidence, keep you moving
@@ -140,8 +140,8 @@ export default function ZyrovApp() {
           <button className="registration-close" type="button" onClick={() => setRegistrationOpen(false)} aria-label="Close registration form">×</button>
           <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
           <div className="registration-content">
-            <h2 id="registration-title">Be the first</h2>
-            <p className="registration-intro">ZYROV membership is opening soon. Join the list for early access to new drops, member releases, and what comes next.</p>
+            <h2 id="registration-title">Be the part of Exclusive Club</h2>
+            <p className="registration-intro">ZYROV Membership is coming soon. Get on the list for early access to exclusive drops, member-only releases, and everything coming next.</p>
             <form onSubmit={registerMember}>
               <div className="field-row">
                 <label>Name <span>*</span><input name="name" type="text" placeholder="Your name here" autoComplete="name" minLength={2} required /></label>
@@ -150,7 +150,7 @@ export default function ZyrovApp() {
               <label>Phone <span>*</span>
                 <div className="phone-field"><span>🇮🇳 +91</span><input name="phone" type="tel" placeholder="Phone number" autoComplete="tel-national" inputMode="numeric" pattern="[6-9][0-9]{9}" maxLength={10} required /></div>
               </label>
-              <small>We will never spam or share your information with third parties.</small>
+              <small>We never spam or share members information with third parties.</small>
               <label className="consent-field">
                 <input name="consent" type="checkbox" required />
                 <span>I agree to ZYROV&apos;s <a href="/terms-and-conditions">Terms &amp; Conditions</a>, consent to the processing of my personal data according to the <a href="/privacy-policy">Privacy Policy</a>, and to receive membership communications by WhatsApp and email. *</span>

@@ -139,13 +139,11 @@ export default function CrystalLogo() {
       const bounds = stage.getBoundingClientRect()
       pointer.targetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2
       pointer.targetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2
-      draw(performance.now(), false)
     }
 
     function resetPointer() {
       pointer.targetX = 0
       pointer.targetY = 0
-      draw(performance.now(), false)
     }
 
     function updateAnimation() {

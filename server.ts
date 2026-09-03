@@ -1,5 +1,5 @@
 import Database from 'better-sqlite3'
-import express from 'express'
+import express, { type NextFunction, type Request, type Response } from 'express'
 import { mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -31,16 +31,25 @@ const emailWebhookUrl = process.env.EMAIL_WEBHOOK_URL
 
 const app = express()
 app.use(express.json({ limit: '16kb' }))
+app.use((error: unknown, _request: Request, response: Response, next: NextFunction) => {
+  if (error instanceof SyntaxError) {
+    response.status(400).json({ message: 'Request body must contain valid JSON.' })
+    return
+  }
+
+  next(error)
+})
 
 app.get('/api/health', (_request, response) => {
   response.json({ ok: true })
 })
 
 app.post('/api/members', async (request, response) => {
-  const name = typeof request.body.name === 'string' ? request.body.name.trim() : ''
-  const email = typeof request.body.email === 'string' ? request.body.email.trim().toLowerCase() : ''
-  const phoneDigits = typeof request.body.phone === 'string' ? request.body.phone.replace(/\D/g, '') : ''
-  const consent = request.body.consent === true
+  const body = request.body && typeof request.body === 'object' ? request.body : {}
+  const name = typeof body.name === 'string' ? body.name.trim() : ''
+  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''
+  const phoneDigits = typeof body.phone === 'string' ? body.phone.replace(/\D/g, '') : ''
+  const consent = body.consent === true
 
   if (name.length < 2 || !/^\S+@\S+\.\S+$/.test(email) || !/^[6-9]\d{9}$/.test(phoneDigits) || !consent) {
     response.status(400).json({ message: 'Please complete every required field with valid information.' })
@@ -94,9 +103,23 @@ app.post('/api/members', async (request, response) => {
   }
 })
 
-app.use(express.static(staticDirectory))
+app.use('/api', (_request, response) => {
+  response.status(404).json({ message: 'API endpoint not found.' })
+})
+
+app.use(express.static(staticDirectory, {
+  setHeaders(response, filePath) {
+    if (filePath.includes(`${join('dist', 'assets')}`)) {
+      response.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+    } else if (filePath.endsWith('.html')) {
+      response.setHeader('Cache-Control', 'no-cache')
+    }
+  },
+}))
 app.use((request, response, next) => {
-  if (request.method === 'GET' && request.accepts('html')) {
+  const isApiRequest = request.path === '/api' || request.path.startsWith('/api/')
+  if (!isApiRequest && (request.method === 'GET' || request.method === 'HEAD') && request.accepts('html')) {
+    response.setHeader('Cache-Control', 'no-cache')
     response.sendFile(join(staticDirectory, 'index.html'))
     return
   }

@@ -35,8 +35,8 @@ main { overflow: hidden; background: #010101; }
 .page-intro.is-opening { visibility: hidden; pointer-events: none; transform: translateY(-100%); transition: transform 1000ms cubic-bezier(.76, 0, .24, 1), visibility 0s linear 1000ms; }
 .page-intro.is-opening .page-intro-tagline { opacity: 0; }
 .page-intro.is-opening .page-intro-announcement { opacity: 1; transform: translateY(0); }
-.hero { position: relative; z-index: 1; height: min(100svh, 920px); min-height: 680px; background: #242522; }
-.hero-image { position: fixed; z-index: 0; inset: 0; width: 100%; height: min(100svh, 920px); min-height: 680px; display: block; object-fit: cover; object-position: center 37%; animation: reveal 900ms ease-out both; }
+.hero { position: relative; z-index: 1; height: auto; min-height: 0; aspect-ratio: 2560 / 1097; background: #c4b8b0; }
+.hero-image { position: fixed; z-index: 0; inset: 0 auto auto 0; width: 100%; height: auto; min-height: 0; aspect-ratio: 2560 / 1097; display: block; object-fit: cover; object-position: center; background: #c4b8b0; animation: reveal 900ms ease-out both; }
 .footer-mark { font-family: 'Arial Black', 'Trebuchet MS', sans-serif; letter-spacing: .38em; text-decoration: none; }
 .manifesto { position: relative; z-index: 2; background: #010101; }
 .manifesto-copy { width: min(100% - 48px, 960px); margin: 0 auto; padding: 150px 0 130px; text-align: center; }
@@ -84,7 +84,7 @@ footer > p { margin: 88px 0 0; font-size: .82rem; opacity: .9; }
 .phone-field { display: flex; align-items: flex-end; border-bottom: 1px solid rgba(0,0,0,.45); }
 .phone-field > span { flex: 0 0 auto; padding: 15px 18px 15px 0; font-size: .95rem; letter-spacing: 0; }
 .phone-field input[type='tel'] { margin: 0; border: 0; box-shadow: none; }
-.registration small { margin-top: -22px; color: rgba(0,0,0,.58); font-size: .75rem; }
+.registration small { width: fit-content; margin-top: -22px; padding: 8px 12px; border-left: 3px solid #b89400; background: rgba(255,215,0,.2); color: #171717; font-size: .78rem; font-weight: 700; line-height: 1.45; }
 .registration .consent-field { display: flex; gap: 14px; align-items: flex-start; max-width: 850px; font-weight: 400; line-height: 1.6; letter-spacing: 0; text-transform: none; }
 .consent-field input { width: 18px; height: 18px; flex: 0 0 auto; margin: 3px 0 0; accent-color: #171717; }
 .consent-field span { color: inherit !important; }
@@ -96,8 +96,8 @@ footer > p { margin: 88px 0 0; font-size: .82rem; opacity: .9; }
 .form-message.error { color: #8b251d; }
 
 @media (max-width: 700px) {
-  .hero { height: auto; min-height: 0; aspect-ratio: 1600 / 888; }
-  .hero-image { bottom: auto; height: auto; min-height: 0; aspect-ratio: 1600 / 888; object-fit: contain; object-position: center; background: #010101; }
+  .hero { height: auto; min-height: 0; aspect-ratio: 1600 / 686; }
+  .hero-image { bottom: auto; height: auto; min-height: 0; aspect-ratio: 1600 / 686; object-fit: contain; object-position: center; background: #010101; }
   .manifesto-copy { width: min(100% - 40px, 520px); padding: 92px 0 88px; }
   .manifesto h1 { margin-bottom: 52px; font-size: clamp(2.65rem, 12.2vw, 4rem); line-height: 1.05; }
   .manifesto-intro { margin-bottom: 48px; font-size: 1.18rem; line-height: 1.42; }
