@@ -137,28 +137,40 @@ export default function ZyrovApp() {
       </section>
 
       <section className="manifesto">
+        <CrystalLogo />
         <div className="manifesto-copy">
-          <h1>What does it take to move beyond?</h1>
+          <h1>Why stop at ordinary?</h1>
           <p className="manifesto-intro">
-            Zyrov is made for people who turn ideas into action. Everyday
-            essentials, shaped around comfort and confidence, keep you moving
-            from the first thought to whatever comes next.
+            You weren&apos;t made to follow every step someone else took.
+            <br /><br />
+            <span className="manifesto-moves">
+              Make your own moves.
+              <br />
+              Take your own route.
+              <br />
+              Find your own next.
+            </span>
+            <br /><br />
+            <strong>Make your move.</strong>
           </p>
           <p className="membership-note">
             <span>Not every door opens for everyone.</span>
-            <span>Some are reserved for <strong>Members.</strong></span>
+            <span>Some are reserved for <strong>Members</strong> only</span>
           </p>
           <button className="cta" type="button" onClick={() => setRegistrationOpen(true)}>
             <span>Get your exclusive</span>
             <strong>Membership Today</strong>
           </button>
-          <CrystalLogo />
+          <div className="manifesto-wordmark-space" aria-hidden="true" />
         </div>
 
       </section>
 
       <footer>
-        <a className="footer-mark" href="https://zyrov.in">ZYROV</a>
+        <CrystalLogo />
+        <a className="footer-logo-link" href="https://zyrov.in">
+          <img className="footer-logo" src="/zyrov-gold-logo-512.webp" width="512" height="341" loading="lazy" decoding="async" alt="ZYROV — Comfort. Style. You." />
+        </a>
         <nav className="footer-links" aria-label="Footer navigation">
           <a href="/brand-history">Brand History</a>
           <a href="/privacy-policy">Privacy Policy</a>

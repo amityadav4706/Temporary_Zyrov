@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 
 type Crystal = {
-  angle: number
-  orbit: number
+  positionX: number
+  positionY: number
   size: number
   speed: number
   phase: number
@@ -21,9 +21,9 @@ function seededRandom(seed: number) {
 
 function createCrystals(count: number) {
   const random = seededRandom(9417)
-  return Array.from({ length: count }, (_, index): Crystal => ({
-    angle: (index / count) * Math.PI * 2 + (random() - 0.5) * 0.13,
-    orbit: 0.78 + random() * 0.23,
+  return Array.from({ length: count }, (): Crystal => ({
+    positionX: 0.04 + random() * 0.92,
+    positionY: 0.04 + random() * 0.92,
     size: 3.5 + random() * 9.5,
     speed: 0.025 + random() * 0.045,
     phase: random() * Math.PI * 2,
@@ -68,13 +68,13 @@ export default function CrystalLogo() {
       canvas.style.width = `${stageWidth}px`
       canvas.style.height = `${stageHeight}px`
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
-      crystals = createCrystals(stageWidth < 500 ? 52 : 82)
+      crystals = createCrystals(stageWidth < 500 ? 34 : 58)
       draw(performance.now(), false)
     }
 
     function drawCrystal(crystal: Crystal, x: number, y: number, rotation: number, pulse: number) {
       const crystalSize = crystal.size * (0.72 + crystal.depth * 0.46) * pulse
-      const alpha = 0.48 + crystal.depth * 0.48
+      const alpha = 0.62 + crystal.depth * 0.38
       const warm = crystal.warmth > 0.38
       const brightColor = warm ? `rgba(255, 226, 150, ${alpha})` : `rgba(225, 232, 228, ${alpha})`
       const darkColor = warm ? `rgba(112, 72, 24, ${alpha * 0.68})` : `rgba(66, 70, 68, ${alpha * 0.68})`
@@ -97,8 +97,8 @@ export default function CrystalLogo() {
       gradient.addColorStop(0.45, darkColor)
       gradient.addColorStop(1, brightColor)
       context.fillStyle = gradient
-      context.shadowColor = warm ? 'rgba(238, 181, 78, .58)' : 'rgba(215, 224, 219, .36)'
-      context.shadowBlur = crystalSize * 1.35
+      context.shadowColor = warm ? 'rgba(238, 181, 78, .78)' : 'rgba(215, 224, 219, .52)'
+      context.shadowBlur = crystalSize * 1.6
       context.fill()
 
       context.beginPath()
@@ -116,17 +116,12 @@ export default function CrystalLogo() {
       pointer.y += (pointer.targetY - pointer.y) * 0.035
       context.clearRect(0, 0, stageWidth, stageHeight)
 
-      const centerX = stageWidth / 2
-      const centerY = stageHeight / 2
-      const orbitX = stageWidth * 0.405
-      const orbitY = stageHeight * 0.39
-
       crystals.forEach((crystal) => {
-        const currentAngle = crystal.angle + elapsed * crystal.speed
+        const currentAngle = crystal.phase + elapsed * crystal.speed
         const drift = Math.sin(elapsed * 0.7 + crystal.phase) * stageWidth * 0.012
         const shimmer = 0.82 + Math.sin(elapsed * 1.8 + crystal.phase) * 0.18
-        const x = centerX + Math.cos(currentAngle) * orbitX * crystal.orbit + drift + pointer.x * crystal.depth * 9
-        const y = centerY + Math.sin(currentAngle) * orbitY * crystal.orbit + Math.cos(elapsed * 0.55 + crystal.phase) * 5 + pointer.y * crystal.depth * 9
+        const x = crystal.positionX * stageWidth + drift * 1.8 + pointer.x * crystal.depth * 9
+        const y = crystal.positionY * stageHeight + Math.cos(elapsed * 0.55 + crystal.phase) * 9 + pointer.y * crystal.depth * 9
         drawCrystal(crystal, x, y, currentAngle + crystal.phase, shimmer)
       })
 
@@ -179,10 +174,8 @@ export default function CrystalLogo() {
   }, [])
 
   return (
-    <div className="crystal-stage" ref={stageRef}>
+    <div className="crystal-stage ambient-crystals" ref={stageRef}>
       <canvas className="crystal-canvas" ref={canvasRef} aria-hidden="true" />
-      <div className="logo-aura" aria-hidden="true" />
-      <img className="membership-logo" src="/zyrov-gold-logo-512.webp" width="512" height="341" loading="lazy" decoding="async" alt="ZYROV — Comfort. Style. You." />
     </div>
   )
 }
