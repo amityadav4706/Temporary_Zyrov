@@ -127,8 +127,8 @@ export default function ZyrovApp() {
 
       <section className="hero" aria-label="Zyrov movement collection">
         <picture>
-          <source media="(max-width: 700px)" srcSet="/zyrov-cap_Standing.png" type="image/png" />
-          <img className="hero-image" src="/zyrov-cap.png" width="6048" height="2592" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
+          <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp?v=20260905-2" type="image/webp" />
+          <img className="hero-image" src="/zyrov-cap-2560.webp?v=20260905" width="2560" height="1097" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
         </picture>
         <div className="scroll-cue" aria-hidden="true">
           <span>Scroll Down</span>
@@ -169,7 +169,7 @@ export default function ZyrovApp() {
       <footer>
         <CrystalLogo />
         <a className="footer-logo-link" href="https://zyrov.in">
-          <img className="footer-logo" src="/zyrov-gold-logo-512.webp" width="512" height="341" loading="lazy" decoding="async" alt="ZYROV — Comfort. Style. You." />
+          <img className="footer-logo" src="/zyrov-gold-logo-512.webp?v=20260905" width="512" height="341" loading="lazy" decoding="async" alt="ZYROV — Comfort. Style. You." />
         </a>
         <nav className="footer-links" aria-label="Footer navigation">
           <a href="/brand-history">Brand History</a>
