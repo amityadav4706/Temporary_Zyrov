@@ -17,11 +17,11 @@ export default function BrandHistory() {
       </section>
 
       <article className="history-story">
-        <p className="history-lead"><strong>ZYROV was born from a simple belief — you should never have to choose between comfort, quality, and style.</strong></p>
+        <p className="history-lead"><strong>ZYROV was born from a simple belief, you should never have to choose between comfort, quality, and style.</strong></p>
 
         <div className="history-prose history-prose-right">
           <p>What began with a vision to create better everyday footwear grew into something much bigger: <strong>a lifestyle designed around the way modern people live.</strong></p>
-          <p>From <strong>shoes that move with you</strong>, to <strong>T-shirts that feel as good as they look</strong>, to <strong>caps that complete your expression</strong>, and <strong>premium bags made to carry your world</strong> — every ZYROV creation is built around the same philosophy.</p>
+          <p>From <strong>shoes that move with you</strong>, to <strong>T shirts that feel as good as they look</strong>, to <strong>caps that complete your expression</strong>, and <strong>premium bags made to carry your world</strong>, every ZYROV creation is built around the same philosophy.</p>
         </div>
 
         <p className="history-mantra">Feel better.<br />Look better.<br />Live better.</p>
@@ -30,7 +30,7 @@ export default function BrandHistory() {
           <p>We believe luxury isn&apos;t only about what carries the highest price tag.</p>
           <p><strong>True luxury is how something feels, how effortlessly it fits into your life, and how confidently you carry it.</strong></p>
           <p>That belief shapes everything we create.</p>
-          <p>ZYROV brings together <strong>comfort, quality, craftsmanship, and contemporary style</strong> to create products that belong in everyday life — yet never feel ordinary.</p>
+          <p>ZYROV brings together <strong>comfort, quality, craftsmanship, and contemporary style</strong> to create products that belong in everyday life, yet never feel ordinary.</p>
         </div>
       </article>
 
@@ -44,7 +44,7 @@ export default function BrandHistory() {
           <span>A way to express who you are.</span>
         </div>
         <p>And as we continue to grow, our vision remains unchanged:</p>
-        <h2>To build a lifestyle brand where comfort meets premium design — and everyday essentials become something you want to be seen in.</h2>
+        <h2>To build a lifestyle brand where comfort meets premium design, and everyday essentials become something you want to be seen in.</h2>
       </section>
 
       <section className="history-close">
