@@ -127,8 +127,8 @@ export default function ZyrovApp() {
 
       <section className="hero" aria-label="Zyrov movement collection">
         <picture>
-          <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp" type="image/webp" />
-          <img className="hero-image" src="/zyrov-cap-2560.webp" width="2560" height="1097" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
+          <source media="(max-width: 700px)" srcSet="/zyrov-cap_Standing.png" type="image/png" />
+          <img className="hero-image" src="/zyrov-cap.png" width="6048" height="2592" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
         </picture>
         <div className="scroll-cue" aria-hidden="true">
           <span>Scroll Down</span>
