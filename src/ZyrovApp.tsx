@@ -63,20 +63,45 @@ export default function ZyrovApp() {
   async function registerMember(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const registrationForm = event.currentTarget
+    const form = new FormData(event.currentTarget)
+    const getTextValue = (fieldName: string) => {
+      const value = form.get(fieldName)
+      return typeof value === 'string' ? value.trim() : ''
+    }
+    const name = getTextValue('name')
+    const email = getTextValue('email').toLowerCase()
+    const phone = getTextValue('phone')
+
+    if (name.length < 2) {
+      setSubmissionState('error')
+      setMessage('Please enter your name.')
+      return
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setSubmissionState('error')
+      setMessage('Please check email id')
+      return
+    }
+    if (!/^[6-9]\d{9}$/.test(phone)) {
+      setSubmissionState('error')
+      setMessage('Please check phone number')
+      return
+    }
+
     setSubmissionState('submitting')
     setMessage('')
-    const form = new FormData(event.currentTarget)
 
     try {
       const response = await fetch('/api/members', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: form.get('name'),
-          email: form.get('email'),
-          phone: form.get('phone'),
-          consent: form.get('consent') === 'on',
+          name,
+          email,
+          phone,
+          consent: true,
         }),
+        signal: AbortSignal.timeout(10_000),
       })
       const result = await response.json().catch(() => null) as { message?: string } | null
       if (!response.ok || !result) throw new Error(result?.message || 'Registration failed.')
@@ -96,11 +121,19 @@ export default function ZyrovApp() {
         <p className="page-intro-announcement"><strong>Coming Soon.</strong> Stay Tuned.</p>
       </div>
 
+      <aside className="membership-ribbon" aria-label="Membership announcement">
+        A private world of exclusive privileges, members-only benefits &amp; special access, created for those who choose ZYROV.
+      </aside>
+
       <section className="hero" aria-label="Zyrov movement collection">
         <picture>
           <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp" type="image/webp" />
-          <img className="hero-image" src="/zyrov-cap-2560.webp" width="2560" height="1097" fetchPriority="high" alt="Zyrov models wearing performance caps" />
+          <img className="hero-image" src="/zyrov-cap-2560.webp" width="2560" height="1097" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
         </picture>
+        <div className="scroll-cue" aria-hidden="true">
+          <span>Scroll Down</span>
+          <i />
+        </div>
       </section>
 
       <section className="manifesto">
@@ -113,7 +146,7 @@ export default function ZyrovApp() {
           </p>
           <p className="membership-note">
             <span>Not every door opens for everyone.</span>
-            <span>Some are reserved for <strong>ZYROV Club Members.</strong></span>
+            <span>Some are reserved for <strong>Members.</strong></span>
           </p>
           <button className="cta" type="button" onClick={() => setRegistrationOpen(true)}>
             <span>Get your exclusive</span>
@@ -141,22 +174,21 @@ export default function ZyrovApp() {
           <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
           <div className="registration-content">
             <h2 id="registration-title">Be the part of Exclusive Club</h2>
-            <p className="registration-intro">ZYROV Membership is coming soon. Get on the list for early access to exclusive drops, member-only releases, and everything coming next.</p>
+            <p className="registration-intro">
+              A privileged experience designed for those who want <strong>first access to exclusive drops, limited releases and everything beyond.</strong>
+            </p>
             <form onSubmit={registerMember}>
               <div className="field-row">
                 <label>Name <span>*</span><input name="name" type="text" placeholder="Your name here" autoComplete="name" minLength={2} required /></label>
-                <label>Email <span>*</span><input name="email" type="email" placeholder="Your email here" autoComplete="email" required /></label>
+                <label>Email <span>*</span><input name="email" type="email" placeholder="Your email here" autoComplete="email" spellCheck={false} onInvalid={(event) => event.currentTarget.setCustomValidity('Please check email id')} onInput={(event) => event.currentTarget.setCustomValidity('')} required /></label>
               </div>
               <label>Phone <span>*</span>
-                <div className="phone-field"><span>🇮🇳 +91</span><input name="phone" type="tel" placeholder="Phone number" autoComplete="tel-national" inputMode="numeric" pattern="[6-9][0-9]{9}" maxLength={10} required /></div>
+                <div className="phone-field"><span>🇮🇳 +91</span><input name="phone" type="tel" placeholder="10-digit mobile number" autoComplete="tel-national" inputMode="numeric" pattern="[6-9][0-9]{9}" maxLength={10} onInvalid={(event) => event.currentTarget.setCustomValidity('Please check phone number')} onInput={(event) => { event.currentTarget.setCustomValidity(''); event.currentTarget.value = event.currentTarget.value.replace(/\D/g, '').slice(0, 10) }} required /></div>
               </label>
-              <small>We never spam or share members information with third parties.</small>
-              <label className="consent-field">
-                <input name="consent" type="checkbox" required />
-                <span>I agree to ZYROV&apos;s <a href="/terms-and-conditions">Terms &amp; Conditions</a>, consent to the processing of my personal data according to the <a href="/privacy-policy">Privacy Policy</a>, and to receive membership communications by WhatsApp and email. *</span>
-              </label>
-              <button className="submit-registration" type="submit" disabled={submissionState === 'submitting'}>{submissionState === 'submitting' ? 'Joining...' : 'Get early access'}</button>
-              {message && <p className={`form-message ${submissionState}`} role="status">{message}</p>}
+              <small className="privacy-note"><span className="privacy-lock" aria-hidden="true">🔒</span><span>No spam calling, privacy assured!</span></small>
+              <p className="consent-field">By submitting this form, I agree to ZYROV&apos;s <a href="/terms-and-conditions">Terms &amp; Conditions</a>, consent to the processing of my personal data according to the <a href="/privacy-policy">Privacy Policy</a>, and to receive membership communications by WhatsApp and email.</p>
+              <button className="submit-registration" type="submit" disabled={submissionState === 'submitting'}>{submissionState === 'submitting' ? 'Joining...' : 'CLAIM YOUR SPACE'}</button>
+              {message && <p className={`form-message ${submissionState}`} role={submissionState === 'error' ? 'alert' : 'status'}>{message}</p>}
             </form>
           </div>
         </div>

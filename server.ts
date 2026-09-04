@@ -28,6 +28,9 @@ const insertMember = database.prepare(`
 `)
 const deleteMember = database.prepare('DELETE FROM members WHERE id = ?')
 const emailWebhookUrl = process.env.EMAIL_WEBHOOK_URL
+const memberRequestWindowMs = 60_000
+const memberRequestLimit = 5
+const memberRequests = new Map<string, { count: number; windowStartedAt: number }>()
 
 const app = express()
 app.use(express.json({ limit: '16kb' }))
@@ -45,6 +48,23 @@ app.get('/api/health', (_request, response) => {
 })
 
 app.post('/api/members', async (request, response) => {
+  const now = Date.now()
+  const clientAddress = request.ip || request.socket.remoteAddress || 'unknown'
+  const requestWindow = memberRequests.get(clientAddress)
+  if (memberRequests.size > 1000) {
+    for (const [address, entry] of memberRequests) {
+      if (now - entry.windowStartedAt >= memberRequestWindowMs) memberRequests.delete(address)
+    }
+  }
+  if (!requestWindow || now - requestWindow.windowStartedAt >= memberRequestWindowMs) {
+    memberRequests.set(clientAddress, { count: 1, windowStartedAt: now })
+  } else if (requestWindow.count >= memberRequestLimit) {
+    response.status(429).json({ message: 'Too many registration attempts. Please try again in a minute.' })
+    return
+  } else {
+    requestWindow.count += 1
+  }
+
   const body = request.body && typeof request.body === 'object' ? request.body : {}
   const name = typeof body.name === 'string' ? body.name.trim() : ''
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''
