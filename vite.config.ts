@@ -6,8 +6,6 @@ import { defineConfig } from 'vite'
 const sourceOnlyAssets = [
   'Name Logo.png',
   'Zyrov_Logo.png',
-  'zyrov-cap.png',
-  'zyrov-cap_Standing.png',
   'zyrov-gold-logo.png',
 ]
 
