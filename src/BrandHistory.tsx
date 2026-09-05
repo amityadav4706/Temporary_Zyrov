@@ -5,13 +5,11 @@ export default function BrandHistory() {
     <main className="history-page">
       <header className="history-header">
         <a className="history-mark" href="/">ZYROV</a>
-        <a className="history-back" href="/">Back to home</a>
       </header>
 
       <section className="history-hero">
         <img src="/brand-history-2560.jpg?v=20260905" width="2560" height="1097" fetchPriority="high" decoding="async" alt="ZYROV brand history" />
         <div className="history-hero-copy">
-          <p>Our History</p>
           <h1>Born from a belief.<br />Built for a lifestyle.</h1>
         </div>
       </section>

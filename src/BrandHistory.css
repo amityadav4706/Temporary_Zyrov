@@ -10,7 +10,7 @@
 .history-hero img { width: 100%; height: auto; display: block; }
 .history-hero-copy { position: absolute; z-index: 1; right: clamp(24px, 6vw, 88px); bottom: clamp(42px, 7vw, 90px); left: clamp(24px, 6vw, 88px); }
 .history-hero-copy p { margin: 0 0 22px; color: var(--history-ink); font-size: calc(.68rem + 15.33px); font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
-.history-hero h1 { max-width: 940px; margin: 0; color: #fff; font: 400 clamp(3.7rem, 8.2vw, 8.8rem)/.91 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
+.history-hero h1 { max-width: 760px; margin: 0; color: #fff; font: 400 clamp(2.7rem, 6vw, 6.2rem)/.94 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
 .history-story, .history-vision { width: min(calc(100% - 48px), 1180px); margin: 0 auto; }
 .history-story { padding: clamp(92px, 13vw, 190px) 0 0; }
 .history-lead { max-width: 1020px; margin: 0 0 clamp(84px, 11vw, 155px); color: var(--history-muted); font: 400 clamp(2.25rem, 5.2vw, 5.65rem)/1.01 'Bodoni 72', Didot, Georgia, serif; }
@@ -27,7 +27,7 @@
 .history-rhythm span:last-child { color: var(--history-yellow); }
 .history-vision h2 { max-width: 1080px; margin: 58px 0 0; color: var(--history-muted); font: 400 clamp(2.3rem, 5.25vw, 5.7rem)/1.03 'Bodoni 72', Didot, Georgia, serif; }
 .history-close { padding: clamp(90px, 12vw, 170px) clamp(24px, 6vw, 88px) clamp(84px, 10vw, 140px); background: var(--history-paper); color: var(--history-ink); }
-.history-close > p { margin: 0 0 28px; color: #746e63; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.history-close > p { margin: 0 0 28px; color: #746e63; font-size: calc(.68rem + 5.33px); font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
 .history-close h2 { max-width: 1100px; margin: 0 0 72px; font: 400 clamp(3rem, 6.6vw, 7.2rem)/.97 'Bodoni 72', Didot, Georgia, serif; }
 .history-close a { display: inline-flex; min-width: 198px; min-height: 58px; align-items: center; justify-content: center; border: 1px solid var(--history-ink); border-radius: 0; background: transparent; color: var(--history-ink); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; transition: background 180ms ease, color 180ms ease; }
 .history-close a:hover, .history-close a:focus-visible { background: var(--history-ink); color: var(--history-paper); }
@@ -38,7 +38,8 @@
   .history-back { font-size: .66rem; }
   .history-hero { aspect-ratio: 2560 / 1097; }
   .history-hero-copy { right: 20px; bottom: 40px; left: 20px; }
-  .history-hero h1 { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .history-hero-copy p { margin-bottom: 10px; font-size: clamp(.75rem, 3.2vw, .98rem); }
+  .history-hero h1 { max-width: 340px; font-size: clamp(1.65rem, 7.6vw, 2.25rem); line-height: .96; }
   .history-story, .history-vision { width: min(100% - 40px, 520px); }
   .history-story { padding: 90px 0 42px; }
   .history-lead { margin-bottom: 80px; font-size: 2.65rem; }

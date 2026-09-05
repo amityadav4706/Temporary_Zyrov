@@ -14,7 +14,7 @@ const Page = isBrandHistory
       ? lazy(() => import('./TermsAndConditions.tsx'))
       : lazy(() => import('./ZyrovApp.tsx'))
 
-if (isBrandHistory) document.title = 'Our History — ZYROV'
+if (isBrandHistory) document.title = 'About ZYROV — ZYROV'
 if (isPrivacyPolicy) document.title = 'Privacy Policy — ZYROV'
 if (isTermsAndConditions) document.title = 'Terms & Conditions — ZYROV'
 
