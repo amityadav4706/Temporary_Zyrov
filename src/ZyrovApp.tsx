@@ -184,16 +184,10 @@ export default function ZyrovApp() {
 
       {registrationOpen && (
         <div className="registration" ref={registrationRef} role="dialog" aria-modal="true" aria-labelledby="registration-title" onKeyDown={keepFocusInRegistration}>
+          <CrystalLogo />
           <button className="registration-close" type="button" onClick={() => setRegistrationOpen(false)} aria-label="Close registration form">×</button>
           <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
           <div className="registration-content">
-            <div className="registration-visual" aria-hidden="true">
-              <div className="registration-balloon registration-balloon-one">Y</div>
-              <div className="registration-balloon registration-balloon-two">R</div>
-              <div className="registration-balloon registration-balloon-three">O</div>
-              <div className="registration-balloon registration-balloon-four">Z</div>
-              <div className="registration-balloon registration-balloon-five">V</div>
-            </div>
             <h2 id="registration-title">Be the part of Exclusive Club</h2>
             <p className="registration-intro">
               A privileged experience designed for those who want first access to exclusive drops, limited releases and everything beyond.
