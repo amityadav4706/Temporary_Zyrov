@@ -244,7 +244,7 @@ export default function ZyrovApp() {
               <div className="footer-contact-content">
                 <p>Contact</p>
                 <h2>We would love to hear from you.</h2>
-                <a href="mailto:info@zyrov.in">info@zyrov.in</a>
+                <a href="mailto:media@zyrov.club">media@zyrov.club</a>
               </div>
             </section>
           )}

@@ -27,8 +27,8 @@
 .history-rhythm span:last-child { color: var(--history-yellow); }
 .history-vision h2 { max-width: 1080px; margin: 58px 0 0; color: var(--history-muted); font: 400 clamp(2.3rem, 5.25vw, 5.7rem)/1.03 'Bodoni 72', Didot, Georgia, serif; }
 .history-close { padding: clamp(90px, 12vw, 170px) clamp(24px, 6vw, 88px) clamp(84px, 10vw, 140px); background: var(--history-paper); color: var(--history-ink); }
-.history-close > p { margin: 0 0 28px; color: #746e63; font-size: calc(.68rem + 5.33px); font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-.history-close h2 { max-width: 1100px; margin: 0 0 72px; font: 400 clamp(3rem, 6.6vw, 7.2rem)/.97 'Bodoni 72', Didot, Georgia, serif; }
+.history-close > p { margin: 0 0 28px; color: #746e63; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.history-close h2 { max-width: 1100px; margin: 0 0 72px; color: var(--history-ink); font: 400 clamp(3rem, 6.6vw, 7.2rem)/.97 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
 .history-close a, .history-close button { display: inline-flex; min-width: 198px; min-height: 58px; align-items: center; justify-content: center; border: 1px solid var(--history-ink); border-radius: 0; background: transparent; color: var(--history-ink); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
 .history-close a:hover, .history-close a:focus-visible, .history-close button:hover, .history-close button:focus-visible { background: var(--history-ink); color: var(--history-paper); }
 
@@ -41,14 +41,16 @@
   .history-hero-copy p { margin-bottom: 10px; font-size: clamp(.75rem, 3.2vw, .98rem); }
   .history-hero h1 { max-width: 340px; font-size: clamp(1.65rem, 7.6vw, 2.25rem); line-height: .96; }
   .history-story, .history-vision { width: min(100% - 40px, 520px); }
-  .history-story { padding: 90px 0 42px; }
-  .history-lead { margin-bottom: 80px; font-size: 2.65rem; }
-  .history-prose p { font-size: 1.08rem; }
-  .history-mantra { margin: 90px 0; font-size: 3.5rem; }
-  .history-vision { width: min(100% - 40px, 520px); padding: 42px 0 110px; }
-  .history-rhythm { margin: 75px 0 90px; font-size: 2.8rem; }
-  .history-vision h2 { margin-top: 45px; font-size: 2.55rem; }
-  .history-close { padding: 85px 20px 75px; }
-  .history-close h2 { margin-bottom: 55px; font-size: 3rem; }
+  .history-story { padding: 80px 0 36px; }
+  .history-lead { margin-bottom: clamp(48px, 10vw, 80px); font-size: clamp(1.75rem, 7.5vw, 2.65rem); }
+  .history-prose p { font-size: clamp(.95rem, 3.8vw, 1.08rem); line-height: 1.6; }
+  .history-mantra { margin: clamp(48px, 10vw, 90px) 0; font-size: clamp(2.35rem, 10vw, 3.5rem); }
+  .history-vision { width: min(100% - 40px, 520px); padding: 36px 0 clamp(60px, 12vw, 110px); }
+  .history-vision-intro { font-size: clamp(1.2rem, 5vw, 1.65rem) !important; }
+  .history-rhythm { margin: clamp(48px, 9vw, 75px) 0 clamp(54px, 10vw, 90px); font-size: clamp(1.75rem, 7.5vw, 2.8rem); }
+  .history-vision h2 { margin-top: 36px; font-size: clamp(1.5rem, 6.5vw, 2.35rem); }
+  .history-close { padding: clamp(60px, 10vw, 85px) 20px clamp(50px, 9vw, 75px); }
+  .history-close > p { margin-bottom: 20px; font-size: .68rem; }
+  .history-close h2 { margin-bottom: 44px; font-size: clamp(1.85rem, 8vw, 3rem); }
   .history-close a, .history-close button { width: 100%; }
 }

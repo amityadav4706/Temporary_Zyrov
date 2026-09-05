@@ -7,14 +7,14 @@
 .policy-back { color: inherit; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-decoration-thickness: 1px; text-transform: uppercase; text-underline-offset: 5px; }
 .policy-content { width: min(calc(100% - 48px), 1180px); margin: 0 auto; padding: clamp(82px, 11vw, 150px) 0 150px; }
 .policy-eyebrow { margin: 0 0 22px; color: #a37d1c; font-size: .68rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
-.policy-content h1 { max-width: 1080px; margin: 0; font: 400 clamp(4rem, 9vw, 9.4rem)/.88 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
-.terms-content h1 { max-width: 1100px; font-size: clamp(3.8rem, 8.4vw, 8.6rem); }
+.policy-content h1 { max-width: 1080px; margin: 0; color: var(--policy-ink); font: 400 clamp(4rem, 9vw, 9.4rem)/.88 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
+.terms-content h1 { max-width: 1100px; font-size: clamp(3.8rem, 8.4vw, 8.6rem); color: var(--policy-ink); }
 .policy-updated { margin: 35px 0 0; color: var(--policy-muted); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.policy-intro { width: min(100%, 760px); margin: clamp(70px, 10vw, 135px) 0 clamp(82px, 11vw, 145px); font: 400 clamp(1.18rem, 1.65vw, 1.45rem)/1.58 'Bodoni 72', Didot, Georgia, serif; }
+.policy-intro { width: min(100%, 760px); margin: clamp(70px, 10vw, 135px) 0 clamp(82px, 11vw, 145px); color: var(--policy-ink); font: 400 clamp(1.18rem, 1.65vw, 1.45rem)/1.58 'Bodoni 72', Didot, Georgia, serif; }
 .policy-intro p { margin: 0 0 22px; }
 .policy-content strong { font-weight: 700; }
 .policy-content section { padding: clamp(52px, 7vw, 90px) 0; border-top: 1px solid var(--policy-line); }
-.policy-content h2 { display: grid; grid-template-columns: 54px minmax(0, 800px); gap: 18px; margin: 0 0 38px; font: 400 clamp(2.2rem, 4.7vw, 4.9rem)/.98 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
+.policy-content h2 { display: grid; grid-template-columns: 54px minmax(0, 800px); gap: 18px; margin: 0 0 38px; color: var(--policy-ink); font: 400 clamp(2.2rem, 4.7vw, 4.9rem)/.98 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
 .policy-content h2 span { padding-top: .38em; color: #a37d1c; font: 700 .62rem/1 'Avenir Next', 'Trebuchet MS', sans-serif; letter-spacing: .12em; }
 .policy-content h3 { max-width: 760px; margin: 46px 0 16px 72px; color: var(--policy-muted); font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; }
 .policy-content section > p, .policy-content section > ul { max-width: 760px; margin-left: 72px; }
@@ -33,16 +33,16 @@
   .policy-mark { font-size: .88rem; }
   .policy-back { font-size: .64rem; }
   .policy-content { width: min(calc(100% - 40px), 520px); padding: 78px 0 92px; }
-  .policy-content h1, .terms-content h1 { font-size: clamp(3.25rem, 16vw, 5.2rem); }
-  .terms-content h1 { font-size: clamp(3rem, 14.5vw, 4.8rem); }
-  .policy-intro { margin: 66px 0 84px; font-size: 1.15rem; }
-  .policy-content section { padding: 58px 0; }
-  .policy-content h2 { grid-template-columns: 36px minmax(0, 1fr); gap: 9px; margin-bottom: 32px; font-size: 2.35rem; }
+  .policy-content h1, .terms-content h1 { font-size: clamp(2.35rem, 11vw, 4.2rem); }
+  .terms-content h1 { font-size: clamp(2.2rem, 10vw, 3.8rem); }
+  .policy-intro { margin: 48px 0 64px; font-size: clamp(1rem, 4.2vw, 1.25rem); }
+  .policy-content section { padding: 48px 0; }
+  .policy-content h2 { grid-template-columns: 36px minmax(0, 1fr); gap: 9px; margin-bottom: 28px; font-size: clamp(1.6rem, 7vw, 2.35rem); }
   .policy-content h2 span { font-size: .56rem; }
   .policy-content h3, .policy-content section > p, .policy-content section > ul { margin-left: 45px; }
-  .policy-content h3 { margin-top: 38px; }
+  .policy-content h3 { margin-top: 32px; }
   .policy-content ul { grid-template-columns: 1fr; gap: 5px; }
   .policy-content p, .policy-content li { font-size: .94rem; line-height: 1.7; }
   .policy-contact > strong, .policy-signoff { margin-left: 45px !important; }
-  .policy-signoff { font-size: 2rem !important; }
+  .policy-signoff { font-size: clamp(1.4rem, 6vw, 2rem) !important; }
 }
