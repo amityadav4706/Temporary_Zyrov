@@ -1,10 +1,15 @@
 import './BrandHistory.css'
 
-export default function BrandHistory() {
+type BrandHistoryProps = {
+  onClose?: () => void
+}
+
+export default function BrandHistory({ onClose }: BrandHistoryProps) {
   return (
     <main className="history-page">
       <header className="history-header">
         <a className="history-mark" href="/">ZYROV</a>
+        {onClose && <button className="footer-page-close" type="button" onClick={onClose} aria-label="Close brand history">×</button>}
       </header>
 
       <section className="history-hero">
@@ -48,7 +53,7 @@ export default function BrandHistory() {
       <section className="history-close">
         <p>This is ZYROV.</p>
         <h2>Not just what you wear.<br />Not just what you carry.<br />It&apos;s how you live.</h2>
-        <a href="/">Discover ZYROV</a>
+        {onClose ? <button type="button" onClick={onClose}>Discover ZYROV</button> : <a href="/">Discover ZYROV</a>}
       </section>
     </main>
   )

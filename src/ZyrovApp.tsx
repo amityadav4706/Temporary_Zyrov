@@ -1,15 +1,22 @@
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from 'react'
+import BrandHistory from './BrandHistory.tsx'
 import CrystalLogo from './CrystalLogo.tsx'
+import PrivacyPolicy from './PrivacyPolicy.tsx'
+import TermsAndConditions from './TermsAndConditions.tsx'
 import './Zyrov.css'
+
+type FooterPanel = 'brand-history' | 'privacy-policy' | 'terms-and-conditions' | 'contact'
 
 export default function ZyrovApp() {
   const [introStage, setIntroStage] = useState<'tagline' | 'announcement' | 'opening'>(() =>
     window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'opening' : 'tagline',
   )
   const [registrationOpen, setRegistrationOpen] = useState(false)
+  const [footerPanel, setFooterPanel] = useState<FooterPanel | null>(null)
   const [submissionState, setSubmissionState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
   const registrationRef = useRef<HTMLDivElement>(null)
+  const footerPanelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -44,9 +51,25 @@ export default function ZyrovApp() {
     }
   }, [registrationOpen])
 
-  function keepFocusInRegistration(event: ReactKeyboardEvent<HTMLDivElement>) {
+  useEffect(() => {
+    if (!footerPanel) return
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setFooterPanel(null)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', closeOnEscape)
+    footerPanelRef.current?.querySelector<HTMLElement>('button, input, a[href]')?.focus()
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', closeOnEscape)
+      previouslyFocused?.focus()
+    }
+  }, [footerPanel])
+
+  function keepFocusInDialog(event: ReactKeyboardEvent<HTMLDivElement>, dialogRef: React.RefObject<HTMLDivElement | null>) {
     if (event.key !== 'Tab') return
-    const focusable = registrationRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), a[href]')
+    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), a[href]')
     if (!focusable?.length) return
 
     const first = focusable[0]
@@ -174,16 +197,16 @@ export default function ZyrovApp() {
           <img className="footer-logo" src="/zyrov-gold-logo-512.webp?v=20260905" width="512" height="341" loading="lazy" decoding="async" alt="ZYROV — Comfort. Style. You." />
         </a>
         <nav className="footer-links" aria-label="Footer navigation">
-          <a href="/brand-history" target="_blank" rel="noopener noreferrer">Brand History</a>
-          <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-          <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>
-          <a href="mailto:info@zyrov.in" target="_blank" rel="noopener noreferrer">Contact</a>
+          <button type="button" onClick={() => setFooterPanel('brand-history')}>About ZYROV</button>
+          <button type="button" onClick={() => setFooterPanel('privacy-policy')}>Privacy Policy</button>
+          <button type="button" onClick={() => setFooterPanel('terms-and-conditions')}>Terms &amp; Conditions</button>
+          <button type="button" onClick={() => setFooterPanel('contact')}>Contact</button>
         </nav>
         <p>© {new Date().getFullYear()} ZYROV. All rights reserved.</p>
       </footer>
 
       {registrationOpen && (
-        <div className="registration" ref={registrationRef} role="dialog" aria-modal="true" aria-labelledby="registration-title" onKeyDown={keepFocusInRegistration}>
+        <div className="registration" ref={registrationRef} role="dialog" aria-modal="true" aria-labelledby="registration-title" onKeyDown={(event) => keepFocusInDialog(event, registrationRef)}>
           <CrystalLogo />
           <button className="registration-close" type="button" onClick={() => setRegistrationOpen(false)} aria-label="Close registration form">×</button>
           <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
@@ -206,6 +229,25 @@ export default function ZyrovApp() {
               {message && <p className={`form-message ${submissionState}`} role={submissionState === 'error' ? 'alert' : 'status'}>{message}</p>}
             </form>
           </div>
+        </div>
+      )}
+
+      {footerPanel && (
+        <div className="registration footer-panel" ref={footerPanelRef} role="dialog" aria-modal="true" aria-label={footerPanel === 'contact' ? 'Contact ZYROV' : undefined} onKeyDown={(event) => keepFocusInDialog(event, footerPanelRef)}>
+          {footerPanel === 'brand-history' && <BrandHistory onClose={() => setFooterPanel(null)} />}
+          {footerPanel === 'privacy-policy' && <PrivacyPolicy onClose={() => setFooterPanel(null)} />}
+          {footerPanel === 'terms-and-conditions' && <TermsAndConditions onClose={() => setFooterPanel(null)} />}
+          {footerPanel === 'contact' && (
+            <section className="footer-contact">
+              <button className="registration-close" type="button" onClick={() => setFooterPanel(null)} aria-label="Close contact">×</button>
+              <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
+              <div className="footer-contact-content">
+                <p>Contact</p>
+                <h2>We would love to hear from you.</h2>
+                <a href="mailto:info@zyrov.in">info@zyrov.in</a>
+              </div>
+            </section>
+          )}
         </div>
       )}
     </main>

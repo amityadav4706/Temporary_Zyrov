@@ -12,12 +12,16 @@ const technicalItems = [
   'Pages viewed and interactions with the Platform', 'Date and time of access', 'Referring website or source',
 ]
 
-export default function PrivacyPolicy() {
+type PrivacyPolicyProps = {
+  onClose?: () => void
+}
+
+export default function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
   return (
     <main className="policy-page">
       <header className="policy-header">
         <a className="policy-mark" href="/">ZYROV</a>
-        <a className="policy-back" href="/">Back to home</a>
+        {onClose && <button className="footer-page-close" type="button" onClick={onClose} aria-label="Close privacy policy">×</button>}
       </header>
 
       <article className="policy-content">

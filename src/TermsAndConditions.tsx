@@ -16,12 +16,16 @@ function Section({ number, title, children }: SectionProps) {
   )
 }
 
-export default function TermsAndConditions() {
+type TermsAndConditionsProps = {
+  onClose?: () => void
+}
+
+export default function TermsAndConditions({ onClose }: TermsAndConditionsProps) {
   return (
     <main className="policy-page">
       <header className="policy-header">
         <a className="policy-mark" href="/">ZYROV</a>
-        <a className="policy-back" href="/">Back to home</a>
+        {onClose && <button className="footer-page-close" type="button" onClick={onClose} aria-label="Close terms and conditions">×</button>}
       </header>
 
       <article className="policy-content terms-content">
@@ -85,7 +89,7 @@ export default function TermsAndConditions() {
           <h3>8.1 Membership Discretion</h3><p><strong>ZYROV and its management reserve the right, at their sole discretion and subject to applicable law, to introduce, modify, suspend, withdraw, replace, extend, restrict, or discontinue any Membership programme, Membership benefit, eligibility criterion, reward, privilege, or associated term at any time.</strong></p><p><strong>ZYROV may also change the structure, pricing, duration, qualification requirements, earning or redemption criteria, benefits, exclusions, limitations, or other terms applicable to Membership from time to time.</strong></p><p>Where legally permissible, such changes may be made <strong>without prior notice or individual intimation.</strong> However, where applicable law requires prior notice, communication, or preservation of an accrued right or benefit, ZYROV shall comply with such requirement.</p>
           <h3>8.2 No Guaranteed Membership Benefit</h3><p>Membership benefits are subject to availability and the applicable Membership terms.</p><p>Unless expressly stated otherwise, Membership does not create a vested or permanent right to any particular discount, reward, product, service, price, offer, or benefit.</p><p>ZYROV does not guarantee that any particular benefit will remain available for the entire duration of a Membership.</p>
           <h3>8.3 Membership Termination</h3><p>ZYROV may suspend, restrict, cancel, or terminate a Membership, subject to applicable law, where:</p><ul><li>The Member violates these Terms;</li><li>Fraudulent or abusive activity is suspected;</li><li>Membership benefits are misused;</li><li>Multiple or duplicate accounts are created for improper purposes;</li><li>False information is provided; or</li><li>The Membership programme is discontinued.</li></ul><p>Where a Membership is terminated due to suspected fraud or abuse, ZYROV may cancel or withhold improperly obtained rewards or benefits to the extent permitted by law.</p>
-+          <h3>8.4 Transferability</h3><p>Unless expressly permitted by ZYROV, Memberships, rewards, points, coupons, benefits, vouchers, and privileges are personal to the registered member and may not be sold, transferred, assigned, exchanged, or commercially exploited.</p>
+          <h3>8.4 Transferability</h3><p>Unless expressly permitted by ZYROV, Memberships, rewards, points, coupons, benefits, vouchers, and privileges are personal to the registered member and may not be sold, transferred, assigned, exchanged, or commercially exploited.</p>
         </Section>
 
         <Section number={9} title="OFFERS, DISCOUNTS & PROMOTIONS">

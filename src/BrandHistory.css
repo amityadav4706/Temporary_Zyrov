@@ -29,8 +29,8 @@
 .history-close { padding: clamp(90px, 12vw, 170px) clamp(24px, 6vw, 88px) clamp(84px, 10vw, 140px); background: var(--history-paper); color: var(--history-ink); }
 .history-close > p { margin: 0 0 28px; color: #746e63; font-size: calc(.68rem + 5.33px); font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
 .history-close h2 { max-width: 1100px; margin: 0 0 72px; font: 400 clamp(3rem, 6.6vw, 7.2rem)/.97 'Bodoni 72', Didot, Georgia, serif; }
-.history-close a { display: inline-flex; min-width: 198px; min-height: 58px; align-items: center; justify-content: center; border: 1px solid var(--history-ink); border-radius: 0; background: transparent; color: var(--history-ink); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; transition: background 180ms ease, color 180ms ease; }
-.history-close a:hover, .history-close a:focus-visible { background: var(--history-ink); color: var(--history-paper); }
+.history-close a, .history-close button { display: inline-flex; min-width: 198px; min-height: 58px; align-items: center; justify-content: center; border: 1px solid var(--history-ink); border-radius: 0; background: transparent; color: var(--history-ink); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
+.history-close a:hover, .history-close a:focus-visible, .history-close button:hover, .history-close button:focus-visible { background: var(--history-ink); color: var(--history-paper); }
 
 @media (max-width: 700px) {
   .history-header { padding: 26px 20px; }
@@ -50,5 +50,5 @@
   .history-vision h2 { margin-top: 45px; font-size: 2.55rem; }
   .history-close { padding: 85px 20px 75px; }
   .history-close h2 { margin-bottom: 55px; font-size: 3rem; }
-  .history-close a { width: 100%; }
+  .history-close a, .history-close button { width: 100%; }
 }
