@@ -139,19 +139,21 @@ export default function ZyrovApp() {
       <section className="manifesto">
         <CrystalLogo />
         <div className="manifesto-copy">
-          <h1>Why stop at ordinary?</h1>
+          <h1>What’s waiting on the other side of your next step?</h1>
           <p className="manifesto-intro">
-            You weren&apos;t made to follow every step someone else took.
+            A new idea.
+            <br />
+            A new place.
+            <br />
+            A new opportunity.
+            <br />
+            Maybe a new you.
             <br /><br />
             <span className="manifesto-moves">
-              Make your own moves.
-              <br />
-              Take your own route.
-              <br />
-              Find your own next.
+              ZYROV is made to move with you bringing comfort and confidence to every step forward.
             </span>
             <br /><br />
-            <strong>Make your move.</strong>
+            <strong className="manifesto-final-line">Your next chapter starts with a move.</strong>
           </p>
           <p className="membership-note">
             <span>Not every door opens for everyone.</span>
@@ -185,9 +187,13 @@ export default function ZyrovApp() {
           <button className="registration-close" type="button" onClick={() => setRegistrationOpen(false)} aria-label="Close registration form">×</button>
           <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
           <div className="registration-content">
+            <div className="registration-visual" aria-hidden="true">
+              <div className="silver-orbit" />
+              <div className="silver-core" />
+            </div>
             <h2 id="registration-title">Be the part of Exclusive Club</h2>
             <p className="registration-intro">
-              A privileged experience designed for those who want <strong>first access to exclusive drops, limited releases and everything beyond.</strong>
+              A privileged experience designed for those who want first access to exclusive drops, limited releases and everything beyond.
             </p>
             <form onSubmit={registerMember}>
               <div className="field-row">

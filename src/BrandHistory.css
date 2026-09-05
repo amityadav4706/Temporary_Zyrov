@@ -9,17 +9,17 @@
 .history-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.38), transparent 48%, rgba(0,0,0,.78)); }
 .history-hero img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 .history-hero-copy { position: absolute; z-index: 1; right: clamp(24px, 6vw, 88px); bottom: clamp(42px, 7vw, 90px); left: clamp(24px, 6vw, 88px); }
-.history-hero-copy p { margin: 0 0 22px; color: var(--history-yellow); font-size: calc(.68rem + 6px); font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.history-hero-copy p { margin: 0 0 22px; color: var(--history-ink); font-size: calc(.68rem + 15.33px); font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
 .history-hero h1 { max-width: 940px; margin: 0; color: #fff; font: 400 clamp(3.7rem, 8.2vw, 8.8rem)/.91 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
 .history-story, .history-vision { width: min(calc(100% - 48px), 1180px); margin: 0 auto; }
-.history-story { padding: clamp(92px, 13vw, 190px) 0 clamp(110px, 15vw, 210px); }
+.history-story { padding: clamp(92px, 13vw, 190px) 0 0; }
 .history-lead { max-width: 1020px; margin: 0 0 clamp(84px, 11vw, 155px); color: var(--history-muted); font: 400 clamp(2.25rem, 5.2vw, 5.65rem)/1.01 'Bodoni 72', Didot, Georgia, serif; }
 .history-prose { max-width: 610px; }
-.history-prose-right { margin-left: auto; }
+.history-prose-right { margin-left: 0; }
 .history-prose p { margin: 0 0 26px; font-size: clamp(1.05rem, 1.45vw, 1.32rem); line-height: 1.65; }
 .history-prose strong { color: #fff; font-weight: 600; }
 .history-mantra { margin: clamp(90px, 12vw, 170px) 0; color: var(--history-yellow); font: 400 clamp(3.8rem, 9.3vw, 10rem)/.83 'Bodoni 72', Didot, Georgia, serif; }
-.history-vision { padding: clamp(105px, 14vw, 190px) 0 clamp(120px, 16vw, 220px); }
+.history-vision { padding: clamp(48px, 6vw, 80px) 0 clamp(120px, 16vw, 220px); }
 .history-vision > p { max-width: 650px; margin: 0 0 24px; font-size: clamp(1.08rem, 1.6vw, 1.45rem); line-height: 1.55; }
 .history-vision-intro { color: var(--history-muted); font-family: 'Bodoni 72', Didot, Georgia, serif; font-size: clamp(1.45rem, 2.3vw, 2.1rem) !important; }
 .history-rhythm { display: grid; gap: 8px; margin: clamp(72px, 9vw, 120px) 0 clamp(90px, 12vw, 160px); font: 400 clamp(2.45rem, 6.15vw, 7.1rem)/1.04 'Bodoni 72', Didot, Georgia, serif; }

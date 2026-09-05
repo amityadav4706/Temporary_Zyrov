@@ -59,7 +59,8 @@ main { overflow: hidden; background: #010101; }
 .ambient-crystals { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; margin: 0; opacity: .58; pointer-events: none; }
 .manifesto h1 { max-width: 930px; margin: 0 auto 68px; color: #f5f3ee; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3.5rem, 6.6vw, 7.6rem); font-weight: 400; line-height: .98; letter-spacing: 0; }
 .manifesto-intro { max-width: 900px; margin: 0 auto 65px; color: #f3f0e9; font-size: clamp(1.35rem, 2.15vw, 2.1rem); line-height: 1.36; letter-spacing: 0; }
-.manifesto-moves { color: #fff0a6; font-family: Georgia, 'Times New Roman', serif; font-style: italic; }
+.manifesto-moves { color: #d7c7b5; font-family: Georgia, 'Times New Roman', serif; font-style: italic; }
+.manifesto-final-line { display: inline; color: inherit; font: inherit; font-size: inherit; font-weight: inherit; letter-spacing: inherit; }
 .cta { position: relative; display: inline-flex; min-width: 250px; min-height: 72px; padding: 0 24px; align-items: center; justify-content: center; flex-direction: column; overflow: hidden; border: 0; border-radius: 4px; background-color: #ffd700; color: #101010; font: inherit; text-transform: uppercase; cursor: pointer; animation: cta-arrive 700ms 250ms ease-out both; transition: background-color 180ms ease, color 180ms ease; }
 .cta::after { position: absolute; inset: -35% auto -35% -20%; width: 16%; background: rgba(255,255,255,.5); content: ''; pointer-events: none; animation: cta-shine 4.2s 1.2s ease-in-out infinite; }
 button.cta:hover, button.cta:focus-visible { background-color: #f2df38; color: #090909; }
@@ -67,7 +68,7 @@ button.cta:hover, button.cta:focus-visible { background-color: #f2df38; color: #
 .cta span, .cta strong { position: relative; z-index: 1; }
 .cta span { font-size: .68rem; letter-spacing: .18em; }
 .cta strong { font-size: .98rem; letter-spacing: .06em; }
-.membership-note { position: relative; max-width: 760px; margin: 0 auto 44px; padding-top: 30px; color: #f3f0e9; letter-spacing: 0; }
+.membership-note { position: relative; max-width: 760px; margin: 48px auto 44px; padding-top: 30px; color: #f3f0e9; letter-spacing: 0; }
 .membership-note::before { position: absolute; top: 0; left: 50%; width: 72px; height: 1px; background: #ffd700; content: ''; transform: translateX(-50%); animation: membership-line-pulse 3.4s ease-in-out infinite; }
 .membership-note span { display: block; }
 .membership-note span:first-child { margin-bottom: 12px; font: italic 400 clamp(1.45rem, 2.8vw, 2.25rem)/1.15 Georgia, 'Times New Roman', serif; }
@@ -92,11 +93,21 @@ footer > p { margin: 88px 0 0; font-size: .82rem; opacity: .9; }
 .registration-mark { position: absolute; top: 34px; left: 5vw; padding-left: .38em; color: inherit; font-family: 'Arial Black', 'Trebuchet MS', sans-serif; font-size: 1.05rem; letter-spacing: .38em; text-decoration: none; }
 .registration-close { position: fixed; z-index: 1; top: 23px; right: 4vw; width: 48px; height: 48px; padding: 0; border: 1px solid #5f5d59; border-radius: 50%; background: transparent; color: #f5f3ee; font: 300 2rem/1 Georgia, serif; cursor: pointer; }
 .registration-close:hover, .registration-close:focus-visible { background: #f5f3ee; color: #0b0b0b; }
-.registration-content { width: min(100% - 48px, 980px); margin: 0 auto; padding: 150px 0 100px; }
+.registration-content { position: relative; width: min(100% - 48px, 980px); margin: 0 auto; padding: 150px 0 100px; }
+.registration-visual { position: absolute; z-index: 0; top: 52px; right: 14px; width: min(34vw, 300px); height: min(34vw, 300px); max-width: 300px; max-height: 300px; pointer-events: none; opacity: 1; filter: drop-shadow(0 16px 24px rgba(0,0,0,.7)); transform: perspective(1200px) rotateX(10deg) rotateY(-18deg); }
+.silver-orbit, .silver-core { position: absolute; inset: 0; border-radius: 50%; }
+.silver-orbit { background: radial-gradient(circle at 30% 28%, rgba(255,255,255,1) 0%, rgba(255,235,176,.96) 14%, rgba(238,178,70,.9) 24%, rgba(120,74,14,.93) 38%, rgba(64,36,6,.96) 50%, rgba(255,206,97,.22) 62%, rgba(10,10,10,.2) 100%); border: 1px solid rgba(255,213,121,.28); box-shadow: inset -16px -12px 22px rgba(32,18,3,.92), inset 16px 10px 20px rgba(255,244,210,.35), 0 24px 30px rgba(0,0,0,.32); transform: rotate(-16deg) scale(1.02); animation: orbitDrift 16.36s ease-in-out infinite alternate; }
+.silver-orbit::before { position: absolute; inset: 14% 16% 16% 12%; border: 1px solid rgba(255,217,128,.18); border-radius: 50%; content: ''; transform: rotate(-18deg); }
+.silver-orbit::after { position: absolute; inset: 30% 25% 28% 22%; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,.5), rgba(255,255,255,0) 38%, rgba(58,33,4,.22) 100%); content: ''; }
+.silver-core { inset: 18% 20% 18% 19%; background: radial-gradient(circle at 34% 25%, rgba(255,255,255,1) 0%, rgba(255,226,149,.96) 12%, rgba(199,136,34,.9) 24%, rgba(70,45,10,.97) 52%, rgba(255,207,95,.14) 72%, rgba(0,0,0,.38) 100%); border: 1px solid rgba(255,211,100,.26); box-shadow: inset -14px -12px 18px rgba(36,18,3,.9), inset 14px 10px 18px rgba(255,244,211,.26); animation: coreFloat 13.64s ease-in-out infinite alternate; }
+.silver-core::before { position: absolute; inset: 16% 12% 14% 16%; border-radius: 50%; background: linear-gradient(130deg, rgba(255,255,255,.42), rgba(255,255,255,0) 46%, rgba(70,42,10,.22) 100%); content: ''; }
+.registration h2, .registration-intro, .registration form { position: relative; z-index: 1; }
 .registration h2 { margin: 0 0 28px; color: #fff0a6; font: 400 clamp(calc(3.7rem - 2pt), calc(7vw - 2pt), calc(7.5rem - 2pt))/.95 Georgia, 'Times New Roman', serif; letter-spacing: 0; }
 .registration-intro { width: calc(100% - clamp(20px, 5vw, 72px)); max-width: 760px; margin: 0 0 28px; font-size: clamp(1.15rem, 1.8vw, 1.55rem); line-height: 1.45; }
 .registration-intro .intro-statement { display: block; margin-top: .7em; }
 .registration form { display: grid; gap: 32px; }
+@keyframes orbitDrift { 0% { transform: rotate(-18deg) scale(1.01) translate3d(0, 10px, 0); } 50% { transform: rotate(-8deg) scale(1.05) translate3d(8px, -10px, 0); } 100% { transform: rotate(-20deg) scale(1.02) translate3d(-6px, 10px, 0); } }
+@keyframes coreFloat { 0% { transform: translate3d(0, 14px, 0) scale(.98); } 50% { transform: translate3d(6px, -4px, 0) scale(1.02); } 100% { transform: translate3d(-8px, 12px, 0) scale(.99); } }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
 .registration label { display: block; font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .registration label > span { color: #b66a76; }
