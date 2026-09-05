@@ -146,6 +146,10 @@ app.use((request, response, next) => {
 
   next()
 })
+app.use((error: unknown, _request: Request, response: Response, _next: NextFunction) => {
+  console.error('Unhandled request error:', error)
+  response.status(500).json({ message: 'An unexpected server error occurred. Please try again.' })
+})
 
 const port = Number(process.env.PORT || process.env.API_PORT) || 3001
 app.listen(port, '0.0.0.0', () => {

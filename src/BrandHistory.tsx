@@ -9,7 +9,7 @@ export default function BrandHistory() {
       </header>
 
       <section className="history-hero">
-        <img src="/Brand History.png" fetchPriority="high" alt="ZYROV brand history" />
+        <img src="/brand-history-2560.jpg?v=20260905" width="2560" height="1097" fetchPriority="high" decoding="async" alt="ZYROV brand history" />
         <div className="history-hero-copy">
           <p>Our History</p>
           <h1>Born from a belief.<br />Built for a lifestyle.</h1>
