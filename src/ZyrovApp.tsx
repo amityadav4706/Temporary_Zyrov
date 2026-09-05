@@ -127,8 +127,8 @@ export default function ZyrovApp() {
 
       <section className="hero" aria-label="Zyrov movement collection">
         <picture>
-          <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp?v=20260905-3" type="image/webp" />
-          <img className="hero-image" src="/zyrov-cap-2560.webp?v=20260905-3" width="2560" height="1097" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
+          <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp?v=20260905-4" type="image/webp" />
+          <img className="hero-image" src="/zyrov-cap-2560.webp?v=20260905-4" width="2560" height="1097" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
         </picture>
         <div className="scroll-cue" aria-hidden="true">
           <span>Scroll Down</span>
@@ -174,10 +174,10 @@ export default function ZyrovApp() {
           <img className="footer-logo" src="/zyrov-gold-logo-512.webp?v=20260905" width="512" height="341" loading="lazy" decoding="async" alt="ZYROV — Comfort. Style. You." />
         </a>
         <nav className="footer-links" aria-label="Footer navigation">
-          <a href="/brand-history">Brand History</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
-          <a href="mailto:info@zyrov.in">Contact</a>
+          <a href="/brand-history" target="_blank" rel="noopener noreferrer">Brand History</a>
+          <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>
+          <a href="mailto:info@zyrov.in" target="_blank" rel="noopener noreferrer">Contact</a>
         </nav>
         <p>© {new Date().getFullYear()} ZYROV. All rights reserved.</p>
       </footer>
@@ -188,8 +188,11 @@ export default function ZyrovApp() {
           <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
           <div className="registration-content">
             <div className="registration-visual" aria-hidden="true">
-              <div className="silver-orbit" />
-              <div className="silver-core" />
+              <div className="registration-balloon registration-balloon-one">Y</div>
+              <div className="registration-balloon registration-balloon-two">R</div>
+              <div className="registration-balloon registration-balloon-three">O</div>
+              <div className="registration-balloon registration-balloon-four">Z</div>
+              <div className="registration-balloon registration-balloon-five">V</div>
             </div>
             <h2 id="registration-title">Be the part of Exclusive Club</h2>
             <p className="registration-intro">

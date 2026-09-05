@@ -5,9 +5,9 @@
 .history-header { position: absolute; z-index: 2; top: 0; left: 0; display: flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: space-between; padding: 34px clamp(24px, 6vw, 88px); color: #fff; }
 .history-mark { padding-left: .34em; color: inherit; font-family: 'Arial Black', 'Trebuchet MS', sans-serif; font-size: 1rem; letter-spacing: .34em; text-decoration: none; }
 .history-back { color: inherit; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-underline-offset: 5px; }
-.history-hero { position: relative; height: min(780px, 78vw); min-height: 580px; overflow: hidden; background: #777; }
+.history-hero { position: relative; aspect-ratio: 2560 / 1097; overflow: hidden; background: #777; }
 .history-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.38), transparent 48%, rgba(0,0,0,.78)); }
-.history-hero img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+.history-hero img { width: 100%; height: auto; display: block; }
 .history-hero-copy { position: absolute; z-index: 1; right: clamp(24px, 6vw, 88px); bottom: clamp(42px, 7vw, 90px); left: clamp(24px, 6vw, 88px); }
 .history-hero-copy p { margin: 0 0 22px; color: var(--history-ink); font-size: calc(.68rem + 15.33px); font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
 .history-hero h1 { max-width: 940px; margin: 0; color: #fff; font: 400 clamp(3.7rem, 8.2vw, 8.8rem)/.91 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
@@ -36,8 +36,7 @@
   .history-header { padding: 26px 20px; }
   .history-mark { font-size: .88rem; }
   .history-back { font-size: .66rem; }
-  .history-hero { height: 610px; min-height: 0; }
-  .history-hero img { object-position: 55% center; }
+  .history-hero { aspect-ratio: 2560 / 1097; }
   .history-hero-copy { right: 20px; bottom: 40px; left: 20px; }
   .history-hero h1 { font-size: clamp(3rem, 14vw, 4.5rem); }
   .history-story, .history-vision { width: min(100% - 40px, 520px); }

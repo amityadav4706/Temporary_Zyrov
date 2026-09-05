@@ -7,6 +7,7 @@ const sourceOnlyAssets = [
   'Name Logo.png',
   'Zyrov_Logo.png',
   'zyrov-gold-logo.png',
+  'zyrov-cap.png',
 ]
 
 // https://vite.dev/config/
