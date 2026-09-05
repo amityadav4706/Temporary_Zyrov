@@ -12,23 +12,23 @@
 .history-hero-copy p { margin: 0 0 22px; color: var(--history-ink); font-size: calc(.68rem + 15.33px); font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
 .history-hero h1 { max-width: 760px; margin: 0; color: #fff; font: 400 clamp(2.7rem, 6vw, 6.2rem)/.94 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
 .history-story, .history-vision { width: min(calc(100% - 48px), 1180px); margin: 0 auto; }
-.history-story { padding: clamp(92px, 13vw, 190px) 0 0; }
-.history-lead { max-width: 1020px; margin: 0 0 clamp(84px, 11vw, 155px); color: var(--history-muted); font: 400 clamp(2.25rem, 5.2vw, 5.65rem)/1.01 'Bodoni 72', Didot, Georgia, serif; }
-.history-prose { max-width: 610px; }
+.history-story { padding: clamp(60px, 8vw, 110px) 0 0; }
+.history-lead { max-width: 800px; margin: 0 0 28px; color: var(--history-muted); font-family: 'Avenir Next', 'Trebuchet MS', sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 400; line-height: 1.7; letter-spacing: 0; }
+.history-prose { max-width: 800px; }
 .history-prose-right { margin-left: 0; }
-.history-prose p { margin: 0 0 26px; font-size: clamp(1.05rem, 1.45vw, 1.32rem); line-height: 1.65; }
-.history-prose strong { color: #fff; font-weight: 600; }
-.history-mantra { margin: clamp(90px, 12vw, 170px) 0; color: var(--history-yellow); font: 400 clamp(3.8rem, 9.3vw, 10rem)/.83 'Bodoni 72', Didot, Georgia, serif; }
-.history-vision { padding: clamp(48px, 6vw, 80px) 0 clamp(120px, 16vw, 220px); }
-.history-vision > p { max-width: 650px; margin: 0 0 24px; font-size: clamp(1.08rem, 1.6vw, 1.45rem); line-height: 1.55; }
-.history-vision-intro { color: var(--history-muted); font-family: 'Bodoni 72', Didot, Georgia, serif; font-size: clamp(1.45rem, 2.3vw, 2.1rem) !important; }
-.history-rhythm { display: grid; gap: 8px; margin: clamp(72px, 9vw, 120px) 0 clamp(90px, 12vw, 160px); font: 400 clamp(2.45rem, 6.15vw, 7.1rem)/1.04 'Bodoni 72', Didot, Georgia, serif; }
+.history-prose p, .history-vision > p { margin: 0 0 24px; font-family: 'Avenir Next', 'Trebuchet MS', sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 400; line-height: 1.7; letter-spacing: 0; }
+.history-prose strong, .history-vision strong, .history-lead strong { color: #fff; font-weight: 600; }
+.history-mantra { max-width: 800px; margin: 32px 0; color: var(--history-yellow); font-family: 'Avenir Next', 'Trebuchet MS', sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 400; line-height: 1.7; letter-spacing: 0; }
+.history-vision { padding: 32px 0 clamp(60px, 8vw, 110px); }
+.history-vision > p { max-width: 800px; }
+.history-vision-intro { color: var(--history-muted); }
+.history-rhythm { display: grid; gap: 4px; max-width: 800px; margin: 28px 0; font-family: 'Avenir Next', 'Trebuchet MS', sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 400; line-height: 1.7; letter-spacing: 0; }
 .history-rhythm span { padding: 0; }
 .history-rhythm span:last-child { color: var(--history-yellow); }
-.history-vision h2 { max-width: 1080px; margin: 58px 0 0; color: var(--history-muted); font: 400 clamp(2.3rem, 5.25vw, 5.7rem)/1.03 'Bodoni 72', Didot, Georgia, serif; }
-.history-close { padding: clamp(90px, 12vw, 170px) clamp(24px, 6vw, 88px) clamp(84px, 10vw, 140px); background: var(--history-paper); color: var(--history-ink); }
-.history-close > p { margin: 0 0 28px; color: #746e63; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-.history-close h2 { max-width: 1100px; margin: 0 0 72px; color: var(--history-ink); font: 400 clamp(3rem, 6.6vw, 7.2rem)/.97 'Bodoni 72', Didot, Georgia, serif; letter-spacing: 0; }
+.history-vision h2 { max-width: 800px; margin: 28px 0 0; color: var(--history-muted); font-family: 'Avenir Next', 'Trebuchet MS', sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 400; line-height: 1.7; letter-spacing: 0; }
+.history-close { padding: clamp(60px, 8vw, 110px) clamp(24px, 6vw, 88px); background: var(--history-paper); color: var(--history-ink); }
+.history-close > p { max-width: 800px; margin: 0 0 16px; color: #746e63; font-family: 'Avenir Next', 'Trebuchet MS', sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 400; line-height: 1.7; letter-spacing: 0; }
+.history-close h2 { max-width: 800px; margin: 0 0 36px; color: var(--history-ink); font-family: 'Avenir Next', 'Trebuchet MS', sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 400; line-height: 1.7; letter-spacing: 0; }
 .history-close a, .history-close button { display: inline-flex; min-width: 198px; min-height: 58px; align-items: center; justify-content: center; border: 1px solid var(--history-ink); border-radius: 0; background: transparent; color: var(--history-ink); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
 .history-close a:hover, .history-close a:focus-visible, .history-close button:hover, .history-close button:focus-visible { background: var(--history-ink); color: var(--history-paper); }
 
@@ -41,16 +41,16 @@
   .history-hero-copy p { margin-bottom: 10px; font-size: clamp(.75rem, 3.2vw, .98rem); }
   .history-hero h1 { max-width: 340px; font-size: clamp(1.65rem, 7.6vw, 2.25rem); line-height: .96; }
   .history-story, .history-vision { width: min(100% - 40px, 520px); }
-  .history-story { padding: 80px 0 36px; }
-  .history-lead { margin-bottom: clamp(48px, 10vw, 80px); font-size: clamp(1.75rem, 7.5vw, 2.65rem); }
-  .history-prose p { font-size: clamp(.95rem, 3.8vw, 1.08rem); line-height: 1.6; }
-  .history-mantra { margin: clamp(48px, 10vw, 90px) 0; font-size: clamp(2.35rem, 10vw, 3.5rem); }
-  .history-vision { width: min(100% - 40px, 520px); padding: 36px 0 clamp(60px, 12vw, 110px); }
-  .history-vision-intro { font-size: clamp(1.2rem, 5vw, 1.65rem) !important; }
-  .history-rhythm { margin: clamp(48px, 9vw, 75px) 0 clamp(54px, 10vw, 90px); font-size: clamp(1.75rem, 7.5vw, 2.8rem); }
-  .history-vision h2 { margin-top: 36px; font-size: clamp(1.5rem, 6.5vw, 2.35rem); }
-  .history-close { padding: clamp(60px, 10vw, 85px) 20px clamp(50px, 9vw, 75px); }
-  .history-close > p { margin-bottom: 20px; font-size: .68rem; }
-  .history-close h2 { margin-bottom: 44px; font-size: clamp(1.85rem, 8vw, 3rem); }
+  .history-story { padding: 48px 0 24px; }
+  .history-lead { margin-bottom: 20px; font-size: clamp(.98rem, 3.8vw, 1.08rem); line-height: 1.65; }
+  .history-prose p, .history-vision > p { font-size: clamp(.98rem, 3.8vw, 1.08rem); line-height: 1.65; margin-bottom: 20px; }
+  .history-mantra { margin: 24px 0; font-size: clamp(.98rem, 3.8vw, 1.08rem); line-height: 1.65; }
+  .history-vision { width: min(100% - 40px, 520px); padding: 24px 0 48px; }
+  .history-vision-intro { font-size: clamp(.98rem, 3.8vw, 1.08rem) !important; line-height: 1.65 !important; }
+  .history-rhythm { margin: 24px 0; font-size: clamp(.98rem, 3.8vw, 1.08rem); line-height: 1.65; }
+  .history-vision h2 { margin-top: 24px; font-size: clamp(.98rem, 3.8vw, 1.08rem); line-height: 1.65; }
+  .history-close { padding: 48px 20px 54px; }
+  .history-close > p { margin-bottom: 12px; font-size: clamp(.98rem, 3.8vw, 1.08rem); line-height: 1.65; }
+  .history-close h2 { margin-bottom: 32px; font-size: clamp(.98rem, 3.8vw, 1.08rem); line-height: 1.65; }
   .history-close a, .history-close button { width: 100%; }
 }
