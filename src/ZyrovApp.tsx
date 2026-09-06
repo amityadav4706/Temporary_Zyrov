@@ -7,10 +7,29 @@ import './Zyrov.css'
 
 type FooterPanel = 'brand-history' | 'privacy-policy' | 'terms-and-conditions' | 'contact'
 
+const HERO_SLIDES = [
+  {
+    desktop: '/zyrov-cap-2560.webp?v=20260906',
+    mobile: '/zyrov-cap-standing-1600.webp?v=20260906',
+    alt: 'ZYROV performance caps collection',
+  },
+  {
+    desktop: '/zyrov-hero-2-2560.webp?v=20260906',
+    mobile: '/zyrov-hero-2-1600.webp?v=20260906',
+    alt: 'ZYROV lifestyle footwear and apparel',
+  },
+  {
+    desktop: '/zyrov-hero-3-2560.webp?v=20260906',
+    mobile: '/zyrov-hero-3-1600.webp?v=20260906',
+    alt: 'ZYROV contemporary movement and comfort',
+  },
+]
+
 export default function ZyrovApp() {
   const [introStage, setIntroStage] = useState<'tagline' | 'announcement' | 'opening'>(() =>
     window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'opening' : 'tagline',
   )
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0)
   const [registrationOpen, setRegistrationOpen] = useState(false)
   const [footerPanel, setFooterPanel] = useState<FooterPanel | null>(null)
   const [submissionState, setSubmissionState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
@@ -33,6 +52,13 @@ export default function ZyrovApp() {
       window.clearTimeout(restoreScroll)
       document.body.style.overflow = ''
     }
+  }, [])
+
+  useEffect(() => {
+    const heroTimer = window.setInterval(() => {
+      setCurrentHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length)
+    }, 3000)
+    return () => window.clearInterval(heroTimer)
   }, [])
 
   useEffect(() => {
@@ -149,10 +175,26 @@ export default function ZyrovApp() {
       </aside>
 
       <section className="hero" aria-label="Zyrov movement collection">
-        <picture>
-          <source media="(max-width: 700px)" srcSet="/zyrov-cap-standing-1600.webp?v=20260905-4" type="image/webp" />
-          <img className="hero-image" src="/zyrov-cap-2560.webp?v=20260905-4" width="2560" height="1097" fetchPriority="high" decoding="async" alt="Zyrov models wearing performance caps" />
-        </picture>
+        <div className="hero-slideshow" aria-live="off">
+          {HERO_SLIDES.map((slide, index) => (
+            <picture
+              key={slide.desktop}
+              className={`hero-slide ${index === currentHeroSlide ? 'is-active' : ''}`}
+              aria-hidden={index !== currentHeroSlide}
+            >
+              <source media="(max-width: 700px)" srcSet={slide.mobile} type="image/webp" />
+              <img
+                className="hero-image"
+                src={slide.desktop}
+                width="2560"
+                height="1097"
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                decoding="async"
+                alt={slide.alt}
+              />
+            </picture>
+          ))}
+        </div>
         <div className="scroll-cue" aria-hidden="true">
           <span>Scroll Down</span>
           <i />
