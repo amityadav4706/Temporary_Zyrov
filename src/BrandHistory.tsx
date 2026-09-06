@@ -13,7 +13,11 @@ export default function BrandHistory({ onClose }: BrandHistoryProps) {
       </header>
 
       <section className="history-hero">
-        <img src="/brand-history-2560.jpg?v=20260905" width="2560" height="1097" fetchPriority="high" decoding="async" alt="ZYROV brand history" />
+        <picture>
+          <source media="(max-width: 700px)" srcSet="/brand-history-1600.webp?v=20260906" type="image/webp" />
+          <source srcSet="/brand-history-2560.webp?v=20260906" type="image/webp" />
+          <img src="/brand-history-2560.jpg?v=20260906" width="2560" height="1097" fetchPriority="high" decoding="async" alt="ZYROV brand history" />
+        </picture>
         <div className="history-hero-copy">
           <h1>Born from a belief.<br />Built for a lifestyle.</h1>
         </div>

@@ -9,6 +9,11 @@ type FooterPanel = 'brand-history' | 'privacy-policy' | 'terms-and-conditions' |
 
 const HERO_SLIDES = [
   {
+    desktop: '/zyrov-hero-3-2560.webp?v=20260906',
+    mobile: '/zyrov-hero-3-1600.webp?v=20260906',
+    alt: 'ZYROV contemporary movement and comfort',
+  },
+  {
     desktop: '/zyrov-cap-2560.webp?v=20260906',
     mobile: '/zyrov-cap-standing-1600.webp?v=20260906',
     alt: 'ZYROV performance caps collection',
@@ -17,11 +22,6 @@ const HERO_SLIDES = [
     desktop: '/zyrov-hero-2-2560.webp?v=20260906',
     mobile: '/zyrov-hero-2-1600.webp?v=20260906',
     alt: 'ZYROV lifestyle footwear and apparel',
-  },
-  {
-    desktop: '/zyrov-hero-3-2560.webp?v=20260906',
-    mobile: '/zyrov-hero-3-1600.webp?v=20260906',
-    alt: 'ZYROV contemporary movement and comfort',
   },
 ]
 
@@ -55,9 +55,18 @@ export default function ZyrovApp() {
   }, [])
 
   useEffect(() => {
+    // Preload slideshow assets in background for smooth transitions
+    const isMobile = window.matchMedia('(max-width: 700px)').matches
+    HERO_SLIDES.forEach((slide) => {
+      const img = new Image()
+      img.src = isMobile ? slide.mobile : slide.desktop
+    })
+  }, [])
+
+  useEffect(() => {
     const heroTimer = window.setInterval(() => {
       setCurrentHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length)
-    }, 3000)
+    }, 6000)
     return () => window.clearInterval(heroTimer)
   }, [])
 
@@ -155,7 +164,7 @@ export default function ZyrovApp() {
       const result = await response.json().catch(() => null) as { message?: string } | null
       if (!response.ok || !result) throw new Error(result?.message || 'Registration failed.')
       setSubmissionState('success')
-      setMessage('You are in. We will contact you when membership access opens.')
+      setMessage('Request submitted successfully. Confirmation will be sent over email.')
       registrationForm.reset()
     } catch (error) {
       setSubmissionState('error')
@@ -266,8 +275,8 @@ export default function ZyrovApp() {
                 <div className="phone-field"><span>🇮🇳 +91</span><input name="phone" type="tel" placeholder="10-digit mobile number" autoComplete="tel-national" inputMode="numeric" pattern="[6-9][0-9]{9}" maxLength={10} onInvalid={(event) => event.currentTarget.setCustomValidity('Please check phone number')} onInput={(event) => { event.currentTarget.setCustomValidity(''); event.currentTarget.value = event.currentTarget.value.replace(/\D/g, '').slice(0, 10) }} required /></div>
               </label>
               <small className="privacy-note"><span className="privacy-lock" aria-hidden="true">🔒</span><span>No spam calling, privacy assured!</span></small>
-              <p className="consent-field">By submitting this form, I agree to ZYROV&apos;s <a href="/terms-and-conditions">Terms &amp; Conditions</a>, consent to the processing of my personal data according to the <a href="/privacy-policy">Privacy Policy</a>, and to receive membership communications by WhatsApp and email.</p>
-              <button className="submit-registration" type="submit" disabled={submissionState === 'submitting'}>{submissionState === 'submitting' ? 'Joining...' : 'CLAIM YOUR SPACE'}</button>
+              <p className="consent-field">By submitting this form, I agree to ZYROV&apos;s <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>, consent to the processing of my personal data according to the <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>, and to receive membership communications by WhatsApp and email.</p>
+              <button className="submit-registration" type="submit" disabled={submissionState === 'submitting'}>{submissionState === 'submitting' ? 'Submitting...' : 'CLAIM YOUR SPACE'}</button>
               {message && <p className={`form-message ${submissionState}`} role={submissionState === 'error' ? 'alert' : 'status'}>{message}</p>}
             </form>
           </div>
