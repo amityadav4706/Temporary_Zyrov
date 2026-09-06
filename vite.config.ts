@@ -8,6 +8,9 @@ const sourceOnlyAssets = [
   'Zyrov_Logo.png',
   'zyrov-gold-logo.png',
   'zyrov-cap.png',
+  'zyrov_hero_2.png',
+  'zyrov_hero_3.png',
+  'zyrov_hero_4.png',
 ]
 
 // https://vite.dev/config/
