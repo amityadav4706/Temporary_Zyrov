@@ -11,6 +11,8 @@ const sourceOnlyAssets = [
   'zyrov_hero_2.png',
   'zyrov_hero_3.png',
   'zyrov_hero_4.png',
+  'plane.png',
+  'Contact_us.png',
 ]
 
 // https://vite.dev/config/

@@ -9,8 +9,8 @@ type FooterPanel = 'brand-history' | 'privacy-policy' | 'terms-and-conditions' |
 
 const HERO_SLIDES = [
   {
-    desktop: '/zyrov-hero-3-2560.webp?v=20260906b',
-    mobile: '/zyrov-hero-3-1600.webp?v=20260906b',
+    desktop: '/zyrov-hero-3-2560.webp?v=20260908a',
+    mobile: '/zyrov-hero-3-1600.webp?v=20260908a',
     alt: 'ZYROV contemporary movement and comfort',
   },
   {
@@ -29,6 +29,27 @@ const HERO_SLIDES = [
     alt: 'ZYROV new arrivals collection',
   },
 ]
+
+const RibbonPlaneIcon = () => (
+  <div className="towed-banner-unit">
+    <div className="towed-plane-wrapper">
+      <picture>
+        <source srcSet="/plane-icon.webp" type="image/webp" />
+        <img src="/plane-icon.png" alt="" className="ribbon-plane-img" width="46" height="20" decoding="async" />
+      </picture>
+    </div>
+    <div className="tow-harness" aria-hidden="true">
+      <svg viewBox="0 0 40 16" fill="none" className="tow-cable-svg">
+        <line x1="0" y1="8" x2="26" y2="8" stroke="#888888" strokeWidth="1.2" />
+        <line x1="26" y1="8" x2="40" y2="2" stroke="#888888" strokeWidth="1" />
+        <line x1="26" y1="8" x2="40" y2="14" stroke="#888888" strokeWidth="1" />
+      </svg>
+    </div>
+    <div className="towed-banner-body">
+      <span>A private world of exclusive privileges, members-only benefits &amp; special access, created for those who choose ZYROV.</span>
+    </div>
+  </div>
+)
 
 export default function ZyrovApp() {
   const [introStage, setIntroStage] = useState<'tagline' | 'announcement' | 'opening'>(() =>
@@ -71,7 +92,7 @@ export default function ZyrovApp() {
   useEffect(() => {
     const heroTimer = window.setInterval(() => {
       setCurrentHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length)
-    }, 6000)
+    }, 4000)
     return () => window.clearInterval(heroTimer)
   }, [])
 
@@ -185,7 +206,16 @@ export default function ZyrovApp() {
       </div>
 
       <aside className="membership-ribbon" aria-label="Membership announcement">
-        A private world of exclusive privileges, members-only benefits &amp; special access, created for those who choose ZYROV.
+        <div className="membership-ribbon-track">
+          <div className="membership-ribbon-content">
+            <RibbonPlaneIcon />
+            <RibbonPlaneIcon />
+          </div>
+          <div className="membership-ribbon-content" aria-hidden="true">
+            <RibbonPlaneIcon />
+            <RibbonPlaneIcon />
+          </div>
+        </div>
       </aside>
 
       <section className="hero" aria-label="Zyrov movement collection">
@@ -209,10 +239,17 @@ export default function ZyrovApp() {
             </picture>
           ))}
         </div>
-        <div className="scroll-cue" aria-hidden="true">
+        <button
+          className="scroll-cue"
+          type="button"
+          onClick={() => {
+            document.querySelector('.manifesto')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+          aria-label="Scroll down to manifesto"
+        >
           <span>Scroll Down</span>
-          <i />
-        </div>
+          <i aria-hidden="true" />
+        </button>
       </section>
 
       <section className="manifesto">
@@ -304,12 +341,42 @@ export default function ZyrovApp() {
           {footerPanel === 'terms-and-conditions' && <TermsAndConditions onClose={() => setFooterPanel(null)} />}
           {footerPanel === 'contact' && (
             <section className="footer-contact">
+              <picture className="footer-contact-bg">
+                <source media="(max-width: 700px)" srcSet="/contact-us-1600.webp" type="image/webp" />
+                <img src="/contact-us-2560.webp" alt="Contact ZYROV background" decoding="async" />
+              </picture>
+              <div className="footer-contact-overlay" aria-hidden="true" />
               <button className="registration-close" type="button" onClick={() => setFooterPanel(null)} aria-label="Close contact">×</button>
               <a className="registration-mark" href="https://zyrov.in">ZYROV</a>
               <div className="footer-contact-content">
                 <p>Contact</p>
                 <h2>We would love to hear from you.</h2>
-                <a href="mailto:media@zyrov.club">media@zyrov.club</a>
+                <div className="footer-contact-links">
+                  <p>
+                    <a href="mailto:media@zyrov.club" className="contact-link">
+                      <span className="contact-icon email-animated-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="2" y="4" width="20" height="16" rx="3" />
+                          <path d="M22 6L12 13L2 6" className="envelope-flap" />
+                        </svg>
+                      </span>
+                      <span className="contact-label">Email:</span>
+                      <span className="contact-value">media@zyrov.club</span>
+                    </a>
+                  </p>
+                  <p>
+                    <a href="https://wa.me/919667799721" target="_blank" rel="noopener noreferrer" className="contact-link">
+                      <span className="contact-icon whatsapp-animated-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.38 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                          <path d="M9.5 8.5c0 .5 1.5 3 2.5 4s3.5 2 4 2 .5-1 .5-1.5-.5-1-1-1-1 .5-1.5.5-1.5-.5-2.5-1.5S10 10 10 9.5s.5-1 0-1-.5 0-.5 0z" fill="currentColor" stroke="none" className="whatsapp-phone-inner" />
+                        </svg>
+                      </span>
+                      <span className="contact-label">WhatsApp:</span>
+                      <span className="contact-value">+91 9667799721</span>
+                    </a>
+                  </p>
+                </div>
               </div>
             </section>
           )}
